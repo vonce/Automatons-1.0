@@ -17,6 +17,12 @@ public class StatusHandler : MonoBehaviour
     [SerializeField]
     private GameObject specialBar;
 
+    private void Start()
+    {
+        HealthChange(-2);
+        SpecialChange(-5);
+    }
+
     private void SetHealthBar(float unitHealth)//changes healthbar size
     {
         healthBar.transform.localScale = new Vector3(unitHealth, healthBar.transform.localScale.y, healthBar.transform.localScale.z);
@@ -46,10 +52,19 @@ public class StatusHandler : MonoBehaviour
     {
         LogicGateEnum logicGateEnum = new LogicGateEnum();
 
-        logicGateEnum.objectCondition = logicGate.objectCondition.enumID();
+        logicGateEnum.objectCondition = new ObjectE[logicGate.objectCondition.Length];
+        for (int i = 0; i < logicGate.objectCondition.Length; i++)
+        {
+            logicGateEnum.objectCondition[i] = logicGate.objectCondition[i].enumID();
+        }
         logicGateEnum.condition = logicGate.condition.enumID();
         logicGateEnum.action = logicGate.action.enumID();
-        logicGateEnum.objectAction = logicGate.objectAction.enumID();
+
+        logicGateEnum.objectAction = new ObjectE[logicGate.objectAction.Length];
+        for (int i = 0; i < logicGate.objectAction.Length; i++)
+        {
+            logicGateEnum.objectAction[i] = logicGate.objectAction[i].enumID();
+        }
 
         return logicGateEnum;
     }

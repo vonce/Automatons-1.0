@@ -5,7 +5,7 @@ using UnityEngine;
 // enums to handle logic gates, unit types, and weapons
 
 public enum UnitTypeE { Command = 0, Factory = 1, Refinery = 2, Automaton = 3 };
-public enum ObjectE { EnemyCommand = 0, AllyCommand = 1, LowestHealthEnemy = 2, NearestAlly = 3, NearestEnemy = 4, Self = 5 };
+public enum ObjectE { Self = 0, Enemy = 1, Ally = 2, Lowest = 3, Nearest = 4};
 public enum ConditionE { Always = 0, LessThanHealth = 1, MoreThanHealth = 2 };
 public enum ActionE { Primary = 0, Secondary = 1, Special = 2, Move = 3,  };
 public enum UnitBuildingE { Unit = 0, Building = 1 };
@@ -20,8 +20,7 @@ public enum StatusE { None = 0, Overload = 1, Oiled = 2, Galvanized = 3, ShortCi
 public interface IObject
 {
     ObjectE enumID();
-    GameObject[] Objects(HashSet<GameObject> objectList);
-    GameObject[] Objects(HashSet<GameObject> objectList, params IObject[] objectParameters);
+    void newObjectList(out List<GameObject> oldObjectList);
 }
 
 public interface ICondition
@@ -42,21 +41,21 @@ public interface IAction
 
 public struct LogicGate
 {
-    public IObject objectCondition;//the object the conditional statement is based
+    public IObject[] objectCondition;//the object the conditional statement is based
     public ICondition condition;//the condition
     public IAction action;//the action
-    public IObject objectAction;//the object the action is performed on
+    public IObject[] objectAction;//the object the action is performed on
 }
 
 public struct LogicGateEnum//enum format for logic gate
 {
-    public ObjectE objectCondition;
+    public ObjectE[] objectCondition;
     public ConditionE condition;
     public ActionE action;
-    public ObjectE objectAction;
+    public ObjectE[] objectAction;
 }
 
-public struct Spherical
+public struct Spherical//spherical coordinates
 {
     public float radius;
     public float theta;
