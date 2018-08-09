@@ -61,10 +61,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\PlayerBuild.cs" />
     <Compile Include="Assets\Scripts\Master.cs" />
     <Compile Include="Assets\Scripts\Misc\HealthBarRotate.cs" />
+    <Compile Include="Assets\Scripts\Misc\SkyboxRotate.cs" />
     <Compile Include="Assets\Scripts\Physics Scripts\Moon.cs" />
-    <Compile Include="Assets\Scripts\Physics Scripts\Physics.cs" />
+    <Compile Include="Assets\Scripts\Physics Scripts\MoonPhysics.cs" />
     <Compile Include="Assets\Scripts\Physics Scripts\SphericalCoordinates.cs" />
     <Compile Include="Assets\Scripts\Unit Scripts\Status.cs" />
     <Compile Include="Assets\Scripts\Unit Scripts\StatusHandler.cs" />

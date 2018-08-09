@@ -17,12 +17,6 @@ public class StatusHandler : MonoBehaviour
     [SerializeField]
     private GameObject specialBar;
 
-    private void Start()
-    {
-        HealthChange(-2);
-        SpecialChange(-5);
-    }
-
     private void SetHealthBar(float unitHealth)//changes healthbar size
     {
         healthBar.transform.localScale = new Vector3(unitHealth, healthBar.transform.localScale.y, healthBar.transform.localScale.z);
