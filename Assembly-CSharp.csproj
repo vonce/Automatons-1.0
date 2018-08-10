@@ -61,6 +61,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\ColliderBuildable.cs" />
+    <Compile Include="Assets\Player.cs" />
     <Compile Include="Assets\PlayerBuild.cs" />
     <Compile Include="Assets\Scripts\Master.cs" />
     <Compile Include="Assets\Scripts\Misc\HealthBarRotate.cs" />
@@ -71,6 +73,7 @@
     <Compile Include="Assets\Scripts\Unit Scripts\Status.cs" />
     <Compile Include="Assets\Scripts\Unit Scripts\StatusHandler.cs" />
     <Compile Include="Assets\Scripts\Unit Scripts\UnitBrain.cs" />
+    <Compile Include="Assets\TriggerBuildable.cs" />
     <None Include="Assets\Canopus-III_Low-Poly_Sci-Fi_Desert_Units_Set\documentation - Low-Poly_Sci-Fi_Desert_Units_Set.txt" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/Vince/Desktop/Automatons 1.0/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>

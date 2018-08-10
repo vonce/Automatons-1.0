@@ -6,11 +6,10 @@ using UnityEngine;
 
 public class Status : StatusHandler
 {
+    public bool active = false;
     public LogicGateEnum[] LogicMatrixEnum = new LogicGateEnum[6];
     public LogicGate[] logicMatrix = new LogicGate[6];
-    [SerializeField]
     public IAction action; //action gameObject is taking
-    [SerializeField]
     public GameObject target; //target of gameObject
     public List<GameObject> inSightRange = new List<GameObject>();//list of objects in sight range
     //private List<GameObject> inAttackRange = new List<GameObject>();//list of objects in attack range
@@ -18,11 +17,15 @@ public class Status : StatusHandler
     public SecondaryTypeE secondaryType;//secondary weapon type
     public SpecialTypeE specialType;//special type
     public HashSet<StatusE> statusEffects;//hashset of status effects
-    public Material blue;
-    public Material red;
-    public Material green;
+    public bool buildable = false;//used for knowing buildable areas
+    [SerializeField]
+    private Material blue;
+    [SerializeField]
+    private Material red;
+    [SerializeField]
+    private Material green;
 
-    private void Awake()
+    private void Start()
     {
         Component[] meshes = GetComponentsInChildren<MeshRenderer>();
         foreach (MeshRenderer mesh in meshes)
@@ -39,7 +42,6 @@ public class Status : StatusHandler
             {
                 mesh.material = green;
             }
-
         }
     }
 }
