@@ -24,10 +24,10 @@ public class TriggerBuildable : MonoBehaviour {
 
         gameObject.GetComponent<MeshRenderer>().material.color = col;
     }
-
-    private void OnTriggerEnter(Collider other)
+    
+    private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.GetComponentInParent<Status>().buildable == false)
+        if (other.gameObject.GetComponentInParent<Status>().colliding == false)
         {
             other.gameObject.GetComponentInParent<Status>().buildable = true;
         }

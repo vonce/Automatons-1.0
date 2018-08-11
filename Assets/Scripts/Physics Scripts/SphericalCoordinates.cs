@@ -37,11 +37,11 @@ public class SphericalCoordinates : MonoBehaviour
     {
         
         sphericalCoordinates.theta += Input.GetAxis("Horizontal") / 50f;
-        if (Input.GetKey(KeyCode.UpArrow) == true && sphericalCoordinates.phi < Mathf.PI / 2.5)
+        if (Input.GetKey(KeyCode.UpArrow) == true && sphericalCoordinates.phi < Mathf.PI / 2.25)
         {
             sphericalCoordinates.phi += 1f / 50f;
         }
-        if  (Input.GetKey(KeyCode.DownArrow) == true && sphericalCoordinates.phi > -Mathf.PI / 2.5)
+        if  (Input.GetKey(KeyCode.DownArrow) == true && sphericalCoordinates.phi > -Mathf.PI / 2.25)
         {
             sphericalCoordinates.phi += -1f / 50f;
         }

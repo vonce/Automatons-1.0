@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\ColliderBuildable.cs" />
+    <Compile Include="Assets\EventSystemScript.cs" />
     <Compile Include="Assets\Player.cs" />
     <Compile Include="Assets\PlayerBuild.cs" />
     <Compile Include="Assets\Scripts\Master.cs" />
@@ -70,9 +71,16 @@
     <Compile Include="Assets\Scripts\Physics Scripts\Moon.cs" />
     <Compile Include="Assets\Scripts\Physics Scripts\MoonPhysics.cs" />
     <Compile Include="Assets\Scripts\Physics Scripts\SphericalCoordinates.cs" />
+    <Compile Include="Assets\Scripts\Unit Scripts\Actions\Always.cs" />
+    <Compile Include="Assets\Scripts\Unit Scripts\Conditions\Move.cs" />
+    <Compile Include="Assets\Scripts\Unit Scripts\InSightRange.cs" />
+    <Compile Include="Assets\Scripts\Unit Scripts\Objects\Enemy.cs" />
+    <Compile Include="Assets\Scripts\Unit Scripts\Objects\Nearest.cs" />
     <Compile Include="Assets\Scripts\Unit Scripts\Status.cs" />
     <Compile Include="Assets\Scripts\Unit Scripts\StatusHandler.cs" />
     <Compile Include="Assets\Scripts\Unit Scripts\UnitBrain.cs" />
+    <Compile Include="Assets\Spawner.cs" />
+    <Compile Include="Assets\TESTDELETE.cs" />
     <Compile Include="Assets\TriggerBuildable.cs" />
     <None Include="Assets\Canopus-III_Low-Poly_Sci-Fi_Desert_Units_Set\documentation - Low-Poly_Sci-Fi_Desert_Units_Set.txt" />
     <Reference Include="UnityEditor.StandardEvents">

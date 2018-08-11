@@ -18,15 +18,15 @@ public class PlayerBuild : MonoBehaviour {
     private GameObject building;
     [SerializeField]
     private GameObject buildingPreview;
-    private GameObject buildingPlaced;
     private Camera playerCamera;
     private int moonLayermask = 1 << 12;
-    private int uiLayermask = 1 << 5;
+    private Player player;
     public HashSet<GameObject> ownedObjects = new HashSet<GameObject>();
 
     // Use this for initialization
     private void Awake()
     {
+        player = GetComponent<Player>();
         foreach (GameObject obj in GameObject.FindGameObjectsWithTag(gameObject.tag))
         {
             if (obj.name != "Player")
@@ -81,7 +81,7 @@ public class PlayerBuild : MonoBehaviour {
                 buildingPreview.transform.position = raycasthit.point;
                 buildingPreview.transform.rotation = Quaternion.FromToRotation(buildingPreview.transform.up, buildingPreview.transform.position) * buildingPreview.transform.rotation;
             }
-            if (buildingPreview.GetComponent<Status>().buildable == true)
+            if (buildingPreview != null && buildingPreview.GetComponent<Status>().buildable == true)
             {
                 buildingPreview.GetComponentInChildren<MeshRenderer>().material.color = Color.green;
             }

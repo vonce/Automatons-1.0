@@ -5,7 +5,6 @@ using UnityEngine;
 public class MoonPhysics : MonoBehaviour
 {
     public Moon moon;
-    public float speed;
 
     private void Awake()
     {
@@ -13,7 +12,6 @@ public class MoonPhysics : MonoBehaviour
     }
     void FixedUpdate ()
     {
-        gameObject.GetComponent<Rigidbody>().MovePosition(gameObject.transform.position + transform.forward.normalized * speed / 10);
         if (moon)
         {
             moon.gravity(gameObject.transform);

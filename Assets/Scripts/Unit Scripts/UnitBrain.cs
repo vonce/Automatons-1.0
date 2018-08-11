@@ -5,23 +5,29 @@ using UnityEngine;
 public class UnitBrain : MonoBehaviour
 {
     private Status status;
+    private float nextCheck;
+    [SerializeField]
+    private float checkRate;
+    private List<GameObject> list = new List<GameObject>();
 
     private void Awake()
     {
         status = GetComponent<Status>();
+        nextCheck = checkRate + Time.time;
     }
 
     private void Update()
     {
-        if (status.logicMatrix != null)
+        if (status.logicMatrix != null && nextCheck <= Time.time && status.active == true)
         {
             CheckLogicMatrix();
+            nextCheck = checkRate + Time.time;
         }
     }
 
     private void FixedUpdate()
     {
-        if (status.action != null)
+        if (status.action != null && status.active == true)
         {
             status.action.Action(status.target);
         }
@@ -47,19 +53,17 @@ public class UnitBrain : MonoBehaviour
     {
         if (objectCondition != null && condition != null)
         {
-            List<GameObject> list = status.inSightRange;
+            list = new List<GameObject>(status.inSightRange);
             for (int i = 0; i < objectCondition.Length; i++)
             {
-                objectCondition[i].newObjectList(out list);
+                objectCondition[i].filterList(list);
             }
-            if (list[0] != null)
+
+            if (list.Count >= 1)
             {
                 return condition.Condition(list[0]);
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
         else
         {
@@ -72,10 +76,10 @@ public class UnitBrain : MonoBehaviour
     {
         if (objectAction != null && action != null)
         {
-            List<GameObject> list = status.inSightRange;
+            list = new List<GameObject>(status.inSightRange);
             for (int i = 0; i < objectAction.Length; i++)
             {
-                objectAction[i].newObjectList(out list);
+                objectAction[i].filterList(list);
             }
             if (list[0] != null)
             {

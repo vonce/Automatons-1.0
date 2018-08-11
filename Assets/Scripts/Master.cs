@@ -13,14 +13,13 @@ public enum PrimaryTypeE { Beam = 0, Laser = 1, Grenade = 2 };
 public enum SecondaryTypeE { Rocket = 0, Heal = 1, Lightning = 2, Napalm = 3, Virus = 4 };
 public enum SpecialTypeE { Lightning = 0, Napalm = 1, Virus = 2 };
 public enum StatusE { None = 0, Overload = 1, Oiled = 2, Galvanized = 3, ShortCircuit = 4, Fire = 5, Corrosion = 6, Virus = 7 }
+public enum BuildingCostE { Factory = 100, Refinery = 25, Silo = 25, Turret = 100 };
 
 //interfaces for logicgates.
-
-
 public interface IObject
 {
     ObjectE enumID();
-    void newObjectList(out List<GameObject> oldObjectList);
+    void filterList(List<GameObject> list);
 }
 
 public interface ICondition

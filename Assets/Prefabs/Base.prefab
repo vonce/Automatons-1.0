@@ -246,7 +246,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1653581042863642}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 4, z: 0}
+  m_LocalPosition: {x: 0, y: 6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224674886734607868}
@@ -432,12 +432,16 @@ MonoBehaviour:
   healthBar: {fileID: 1628563639965288}
   specialBar: {fileID: 1501787997440844}
   active: 0
+  speed: 0
+  sightRange: 0
   target: {fileID: 0}
   inSightRange: []
+  filteredInSightRange: []
   primaryType: 0
   secondaryType: 0
   specialType: 0
   buildable: 0
+  colliding: 0
   blue: {fileID: 2100000, guid: d697aa8eca9a6074e932a13fe7d7f5c1, type: 2}
   red: {fileID: 2100000, guid: 21583e009529de2498db37e0c7b79bfe, type: 2}
   green: {fileID: 2100000, guid: 466c52d1edcd56d4b95e88152cfc7345, type: 2}
