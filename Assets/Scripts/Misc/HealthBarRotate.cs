@@ -13,7 +13,6 @@ public class HealthBarRotate : MonoBehaviour {
 
     void FixedUpdate()
     {
-        
         transform.rotation = playerCam.transform.rotation;//rotates health bar to player rotation
 	}
 }

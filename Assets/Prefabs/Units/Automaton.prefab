@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 224266606986346240}
   - component: {fileID: 222587889318083890}
   - component: {fileID: 114624094721523908}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SpecialBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4425792576780510}
   - component: {fileID: 33160071519889740}
   - component: {fileID: 23175533483834660}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: unit_Infantry_Light_A_Leg_R_Upper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 4861088239675574}
   - component: {fileID: 33340306738903740}
   - component: {fileID: 23942347562773680}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: unit_Infantry_Light_A_Leg_L_Lower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 4011891859534578}
   - component: {fileID: 33411645400705680}
   - component: {fileID: 23407928019468480}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: unit_Infantry_Light_A_Arm_R_Upper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 224386433674686252}
   - component: {fileID: 222839824868920408}
   - component: {fileID: 114812417787251800}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Health
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 4469542536633352}
   - component: {fileID: 33926356051789228}
   - component: {fileID: 23586578488004926}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: unit_Infantry_Light_A_Hand_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 4872957599262450}
   - component: {fileID: 33088918573983064}
   - component: {fileID: 23204694236969378}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: unit_Infantry_Light_A_Arm_L_Lower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 4217836083394076}
   - component: {fileID: 33437051611703544}
   - component: {fileID: 23366515835981340}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: unit_Infantry_Light_A_Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -156,7 +156,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4359359413310420}
   - component: {fileID: 114828617909747748}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 224658131810473346}
   - component: {fileID: 222277600330569914}
   - component: {fileID: 114832145707412574}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Special
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -191,13 +191,16 @@ GameObject:
   - component: {fileID: 54456127680814306}
   - component: {fileID: 114170793993879934}
   - component: {fileID: 114832164697960922}
+  - component: {fileID: 114012420242738916}
+  - component: {fileID: 114836149480177586}
   - component: {fileID: 114863383337687844}
   - component: {fileID: 114571026657731522}
   - component: {fileID: 114429852397395520}
   - component: {fileID: 114502602769195910}
+  - component: {fileID: 114644379321999524}
   - component: {fileID: 114211511986557080}
   - component: {fileID: 114336544232116226}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Automaton
   m_TagString: Green
   m_Icon: {fileID: 0}
@@ -214,7 +217,7 @@ GameObject:
   - component: {fileID: 4409696436727296}
   - component: {fileID: 136302871510248228}
   - component: {fileID: 114480545739340460}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -231,7 +234,7 @@ GameObject:
   - component: {fileID: 4923170263786110}
   - component: {fileID: 33711644482461574}
   - component: {fileID: 23468838624742552}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: unit_Infantry_Light_A_Leg_R_Lower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -248,7 +251,7 @@ GameObject:
   - component: {fileID: 4861999574601342}
   - component: {fileID: 33200896339435912}
   - component: {fileID: 23027788443840686}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: unit_Infantry_Light_A_Arm_L_Upper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -265,7 +268,7 @@ GameObject:
   - component: {fileID: 4497464040167098}
   - component: {fileID: 33320387184695406}
   - component: {fileID: 23795840694725440}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: unit_Infantry_Light_A_Weapon_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -283,7 +286,7 @@ GameObject:
   - component: {fileID: 223972168730264272}
   - component: {fileID: 114766245760047496}
   - component: {fileID: 114189422365172088}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -300,7 +303,7 @@ GameObject:
   - component: {fileID: 4589967991395182}
   - component: {fileID: 33934311162340950}
   - component: {fileID: 23725388531643184}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: unit_Infantry_Light_A_Foot_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -317,7 +320,7 @@ GameObject:
   - component: {fileID: 4971045621566528}
   - component: {fileID: 33352431251025238}
   - component: {fileID: 23297966532619284}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: unit_Infantry_Light_A_Arm_R_Lower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -351,7 +354,7 @@ GameObject:
   - component: {fileID: 4005376384481006}
   - component: {fileID: 33512335424754996}
   - component: {fileID: 23959424439239930}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: unit_Infantry_Light_A_Foot_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -368,7 +371,7 @@ GameObject:
   - component: {fileID: 4096496981255648}
   - component: {fileID: 33905611207844978}
   - component: {fileID: 23445027968998520}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: unit_Infantry_Light_A_Leg_L_Upper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -385,7 +388,7 @@ GameObject:
   - component: {fileID: 224438275623126940}
   - component: {fileID: 222044476427295608}
   - component: {fileID: 114569175587467938}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -403,7 +406,7 @@ GameObject:
   - component: {fileID: 33768887813425950}
   - component: {fileID: 23903918513133352}
   - component: {fileID: 111188185557698320}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -420,7 +423,7 @@ GameObject:
   - component: {fileID: 4654524948465638}
   - component: {fileID: 33820147307481384}
   - component: {fileID: 23861197014067524}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: unit_Infantry_Light_A_Chest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -437,7 +440,7 @@ GameObject:
   - component: {fileID: 224587432154659566}
   - component: {fileID: 222773894191080522}
   - component: {fileID: 114202724435479760}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: HealthBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -454,7 +457,7 @@ GameObject:
   - component: {fileID: 4762813050091090}
   - component: {fileID: 33244466884746178}
   - component: {fileID: 23561952764426652}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: unit_Infantry_Light_A_Hand_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -480,14 +483,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1145415218743202}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0.3592053, y: -0.0008288574, z: 0.11937072}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4971045621566528}
   m_Father: {fileID: 4654524948465638}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!4 &4020876273747306
 Transform:
   m_ObjectHideFlags: 1
@@ -496,7 +499,7 @@ Transform:
   m_GameObject: {fileID: 1769231335897920}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 25, y: 25, z: 0}
   m_Children: []
   m_Father: {fileID: 4603234251615846}
   m_RootOrder: 3
@@ -534,7 +537,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1362838634752240}
-  m_LocalRotation: {x: 0.03877577, y: 0.64267355, z: -0.7646142, w: 0.028850358}
+  m_LocalRotation: {x: 0.023914253, y: 0.7380629, z: -0.67285544, w: 0.044236917}
   m_LocalPosition: {x: 0, y: 4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -614,8 +617,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1388749449566870}
-  m_LocalRotation: {x: 0.99707603, y: 0, z: 0.04833121, w: 0.059190966}
-  m_LocalPosition: {x: 10, y: -105, z: 0}
+  m_LocalRotation: {x: 0.99158573, y: 0.017872116, z: 0.047004107, w: 0.11928559}
+  m_LocalPosition: {x: 9.208597, y: -98.720055, z: 13.021236}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4359359413310420}
@@ -647,14 +650,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1995094660144900}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: -0.30070576, z: 0, w: 0.953717}
   m_LocalPosition: {x: 0.029194945, y: 0, z: -0.40990433}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4497464040167098}
   m_Father: {fileID: 4971045621566528}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -35, z: 0}
 --- !u!4 &4861088239675574
 Transform:
   m_ObjectHideFlags: 1
@@ -733,14 +736,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1730776242089616}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.30070576, z: 0, w: 0.953717}
   m_LocalPosition: {x: -0, y: 0, z: -0.44469237}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4762813050091090}
   m_Father: {fileID: 4011891859534578}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 35, z: 0}
 --- !u!23 &23027788443840686
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -1442,6 +1445,25 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!114 &114012420242738916
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1388749449566870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0ba526395b283f4e9f152c39174b6ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BulletPrefab: {fileID: 54746919351140734, guid: 37275c128c1199443b90adfea36cba87,
+    type: 2}
+  BeamPrefab: {fileID: 0}
+  GrenadePrefab: {fileID: 0}
+  gunFireRate: 1
+  beamTickRate: 1
+  grenadeFireRate: 2
+  weapon: {fileID: 1500536961805572}
 --- !u!114 &114095792582823454
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1464,19 +1486,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77661fc17edf4494c8b3529483f4580f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  active: 1
+  speed: 2
+  attackSpeed: 0
+  sightRange: 25
+  attackRange: 10
+  attackPower: 0
+  defense: 0
   maxHealth: 10
   maxSpecial: 10
   currentHealth: 10
   currentSpecial: 10
   healthBar: {fileID: 1191117618795720}
   specialBar: {fileID: 1385443998737884}
-  active: 1
-  speed: 2
-  sightRange: 25
   target: {fileID: 0}
   enemyBase: {fileID: 0}
-  inSightRange: []
+  inSightRange:
+  - {fileID: 0}
   filteredInSightRange: []
+  unitType: 5
   primaryType: 0
   secondaryType: 0
   specialType: 0
@@ -1649,6 +1677,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114644379321999524
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1388749449566870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cff720cb7f8fb814e9724c8a3c0faf6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114766245760047496
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1747,6 +1786,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkRate: 0.5
+  moveDirection: {x: 0, y: 0, z: 0}
+--- !u!114 &114836149480177586
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1388749449566870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 756bf962b0ca04043b1c2a99b132f007, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114863383337687844
 MonoBehaviour:
   m_ObjectHideFlags: 1

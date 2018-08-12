@@ -17,11 +17,10 @@ public class EventSystemScript : MonoBehaviour {
     private GameObject nightLight;
     private GameObject[] players = new GameObject[2];
     private Player[] playerScripts = new Player[2];
-    private bool day;
     // Update is called once per frame
     private void Awake()
     {
-        day = false;
+        nextDayCycle = Mathf.Infinity;
         playerScripts[0] = player1.GetComponent<Player>();
         playerScripts[1] = player2.GetComponent<Player>();
         players[0] = player1;
@@ -35,7 +34,6 @@ public class EventSystemScript : MonoBehaviour {
         {
             playerScript.done = false;
         }
-        day = true;
         dayLight.SetActive(true);
         nightLight.SetActive(false);
         nextDayCycle = dayCycleTime + Time.time;
@@ -54,11 +52,11 @@ public class EventSystemScript : MonoBehaviour {
 
     void night()
     {
+        nextDayCycle = Mathf.Infinity;
         foreach (Player playerScript in playerScripts)
         {
             playerScript.nextNight();
         }
-        day = false;
         dayLight.SetActive(false);
         nightLight.SetActive(true);
         foreach (GameObject player in players)

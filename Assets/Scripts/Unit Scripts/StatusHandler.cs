@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class StatusHandler : MonoBehaviour
 {
+    public bool active = false;
+    public float speed;
+    public float attackSpeed;
+    public float sightRange;
+    public float attackRange;
+    public int attackPower;
+    public int defense;
     [SerializeField]
     private int maxHealth;
     [SerializeField]
@@ -28,7 +35,14 @@ public class StatusHandler : MonoBehaviour
 
     public void HealthChange(int amount)//method used for all health changes
     {
-        currentHealth = currentHealth + amount;
+        if (amount - defense > 0)
+        {
+            currentHealth = currentHealth + (amount - defense);
+        }
+        else
+        {
+            currentHealth = currentHealth + amount;
+        }
         SetHealthBar((float) currentHealth / maxHealth);
         if (currentHealth <= 0)
         {

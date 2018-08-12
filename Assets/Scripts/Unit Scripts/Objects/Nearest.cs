@@ -10,11 +10,11 @@ public class Nearest : MonoBehaviour, IObject
     }
     public void filterList(List<GameObject> list)
     {
-        foreach (GameObject i in list)
+        foreach (GameObject obj in list)
         {
-            if (i != null && i.transform.position.magnitude < list[0].transform.position.magnitude)
+            if (obj != null && Vector3.Distance(gameObject.transform.position, obj.transform.position) < Vector3.Distance(gameObject.transform.position, list[0].transform.position))
             {
-                list[0] = i;
+                list[0] = obj;
             }
         }
         if (list.Count >= 1)

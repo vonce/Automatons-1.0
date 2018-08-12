@@ -6,45 +6,55 @@ using UnityEngine.UI;
 public class PlayerBuild : MonoBehaviour {
 
     [SerializeField]
-    private GameObject factory;
+    private GameObject factoryPrefab;
     [SerializeField]
-    private GameObject refinery;
+    private GameObject refineryPrefab;
     [SerializeField]
-    private GameObject silo;
+    private GameObject emitterPrefab;
+    [SerializeField]
+    private GameObject turretPrefab;
     [SerializeField]
     private bool isBuilding = false;
-    private bool buildable = false;
     private GameObject buildableArea;
     private GameObject building;
     [SerializeField]
     private GameObject buildingPreview;
+    private Player player;
     private Camera playerCamera;
     private int moonLayermask = 1 << 12;
-    private Player player;
-    public HashSet<GameObject> ownedObjects = new HashSet<GameObject>();
 
     // Use this for initialization
     private void Awake()
     {
-        player = GetComponent<Player>();
-        foreach (GameObject obj in GameObject.FindGameObjectsWithTag(gameObject.tag))
-        {
-            if (obj.name != "Player")
-            {
-                ownedObjects.Add(obj);
-            }
-        }
+        player = gameObject.GetComponent<Player>();
         playerCamera = gameObject.GetComponent<Camera>();
     }
     void Start ()
     {
-        building = factory;
+        
 	}
+
+    public void BuildFactory()
+    {
+        building = factoryPrefab;
+    }
+    public void BuildRefinery()
+    {
+        building = refineryPrefab;
+    }
+    public void BuildEmitter()
+    {
+        building = emitterPrefab;
+    }
+    public void BuildTurret()
+    {
+        building = turretPrefab;
+    }
 
     public void Build()
     {
         isBuilding = true;
-        foreach (GameObject obj in ownedObjects)
+        foreach (GameObject obj in player.ownedObjects)
         {
             if (obj != null && obj.transform.Find("Buildable").gameObject != null)
             {
@@ -69,7 +79,7 @@ public class PlayerBuild : MonoBehaviour {
                 }
                 buildingPreview.GetComponentInChildren<MeshRenderer>().material.color = Color.red;
                 buildingPreview.transform.Find("Collider").GetComponent<Collider>().isTrigger = true;
-                buildingPreview.transform.rotation = Quaternion.FromToRotation(buildingPreview.transform.up, buildingPreview.transform.position) * buildingPreview.transform.rotation;
+                buildingPreview.transform.rotation = Quaternion.LookRotation(Vector3.ProjectOnPlane(player.myBase.transform.position - buildingPreview.transform.position, buildingPreview.transform.position), buildingPreview.transform.position);
             }
         }
 
@@ -79,13 +89,13 @@ public class PlayerBuild : MonoBehaviour {
             if (Physics.Raycast(playerCamera.ScreenPointToRay(Input.mousePosition), out raycasthit, Mathf.Infinity, moonLayermask) == true && buildingPreview != null)
             {
                 buildingPreview.transform.position = raycasthit.point;
-                buildingPreview.transform.rotation = Quaternion.FromToRotation(buildingPreview.transform.up, buildingPreview.transform.position) * buildingPreview.transform.rotation;
+                buildingPreview.transform.rotation = Quaternion.LookRotation(Vector3.ProjectOnPlane(player.myBase.transform.position - buildingPreview.transform.position, buildingPreview.transform.position), buildingPreview.transform.position);
             }
             if (buildingPreview != null && buildingPreview.GetComponent<Status>().buildable == true)
             {
                 buildingPreview.GetComponentInChildren<MeshRenderer>().material.color = Color.green;
             }
-            else
+            else if (buildingPreview != null)
             {
                 buildingPreview.GetComponentInChildren<MeshRenderer>().material.color = Color.red;
             }
@@ -101,10 +111,10 @@ public class PlayerBuild : MonoBehaviour {
                 {
                     script.enabled = true;
                 }
-                ownedObjects.Add(buildingPreview);
+                player.ownedObjects.Add(buildingPreview);
                 buildingPreview = null;
                 isBuilding = false;
-                foreach (GameObject obj in ownedObjects)
+                foreach (GameObject obj in player.ownedObjects)
                 {
                     buildableArea = obj.transform.Find("Buildable").gameObject;
                     buildableArea.SetActive(false);
@@ -116,7 +126,7 @@ public class PlayerBuild : MonoBehaviour {
                 {
                     Destroy(buildingPreview);
                     isBuilding = false;
-                    foreach (GameObject obj in ownedObjects)
+                    foreach (GameObject obj in player.ownedObjects)
                     {
                         buildableArea = obj.transform.Find("Buildable").gameObject;
                         buildableArea.SetActive(false);

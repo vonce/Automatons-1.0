@@ -37,16 +37,25 @@ public class SphericalCoordinates : MonoBehaviour
     {
         
         sphericalCoordinates.theta += Input.GetAxis("Horizontal") / 50f;
-        if (Input.GetKey(KeyCode.UpArrow) == true && sphericalCoordinates.phi < Mathf.PI / 2.25)
+        if (Input.GetKey(KeyCode.UpArrow) == true && sphericalCoordinates.phi < Mathf.PI / 2.25f)
         {
             sphericalCoordinates.phi += 1f / 50f;
         }
-        if  (Input.GetKey(KeyCode.DownArrow) == true && sphericalCoordinates.phi > -Mathf.PI / 2.25)
+        if (Input.GetKey(KeyCode.DownArrow) == true && sphericalCoordinates.phi > -Mathf.PI / 2.25f)
         {
             sphericalCoordinates.phi += -1f / 50f;
         }
 
-        
+        if (Input.GetAxis("Mouse ScrollWheel") < 0f && sphericalCoordinates.radius < 180f)
+        {
+            sphericalCoordinates.radius += 5;
+        }
+        if (Input.GetAxis("Mouse ScrollWheel") > 0f && sphericalCoordinates.radius > 120f)
+        {
+            sphericalCoordinates.radius -= 5;
+        }
+
+
 
         SphericalToCartesian(sphericalCoordinates, out cartesianCoordinates);
         gameObject.transform.position = cartesianCoordinates;

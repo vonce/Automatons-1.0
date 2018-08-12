@@ -9,7 +9,28 @@ public class UnitBrain : MonoBehaviour
     [SerializeField]
     private float checkRate;
     private List<GameObject> list = new List<GameObject>();
+    private GameObject objCheck;
+    public Vector3 moveDirection;
 
+    public void MoveToTarget()
+    {
+        if (status.target != null)
+        {
+            moveDirection = Vector3.ProjectOnPlane(transform.position - status.target.transform.position, transform.up);
+            transform.rotation = Quaternion.LookRotation(-moveDirection, transform.up);
+            transform.position = Vector3.MoveTowards(transform.position, transform.position - moveDirection, status.speed * Time.deltaTime);
+        }
+    }
+
+    public void RotateToTarget()
+    {
+        if (status.target != null)
+        {
+            moveDirection = Vector3.ProjectOnPlane(transform.position - status.target.transform.position, transform.up);
+            transform.rotation = Quaternion.LookRotation(-moveDirection, transform.up);
+        }
+    }
+    
     private void Awake()
     {
         status = GetComponent<Status>();
@@ -81,13 +102,22 @@ public class UnitBrain : MonoBehaviour
             {
                 objectAction[i].filterList(list);
             }
-            if (list[0] != null)
+            if (list.Count > 0)
             {
-                if (action.ActionCheck(list[0]) == true)
+                objCheck = list[0];
+                foreach (GameObject obj in list)
                 {
-                    status.target = list[0];
+                    if (obj != null && Vector3.Distance(gameObject.transform.position, obj.transform.position) < Vector3.Distance(gameObject.transform.position, objCheck.transform.position))
+                    {
+                        objCheck = obj;
+                    }
                 }
-                return action.ActionCheck(list[0]);
+                if (action.ActionCheck(objCheck) == true)
+                {
+                    status.target = objCheck;
+                    return action.ActionCheck(status.target);
+                }
+                return false;
             }
             else
             {

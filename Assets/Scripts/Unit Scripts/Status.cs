@@ -6,21 +6,20 @@ using UnityEngine;
 
 public class Status : StatusHandler
 {
-    public bool active = false;
-    public float speed;
-    public float sightRange;
     public LogicGateEnum[] LogicMatrixEnum = new LogicGateEnum[6];
     public LogicGate[] logicMatrix = new LogicGate[6];
+    [SerializeField]
     public IAction action; //action gameObject is taking
     public GameObject target; //target of gameObject
     public GameObject enemyBase;//enemyBase
     public List<GameObject> inSightRange = new List<GameObject>();//list of objects in sight range
     public List<GameObject> filteredInSightRange = new List<GameObject>();//list of objects that satisfy object filters
     //private List<GameObject> inAttackRange = new List<GameObject>();//list of objects in attack range
+    public UnitTypeE unitType;//unit type
     public PrimaryTypeE primaryType;//primary weapon type
     public SecondaryTypeE secondaryType;//secondary weapon type
     public SpecialTypeE specialType;//special type
-    public HashSet<StatusE> statusEffects;//hashset of status effects
+    public HashSet<StatusE> statusEffects;//hashset of status effects on unit
     public bool buildable = false;//used for knowing buildable areas
     public bool colliding = false;//" "
     [SerializeField]
@@ -30,9 +29,17 @@ public class Status : StatusHandler
     [SerializeField]
     private Material green;
 
-    private void Start()
+    void Start()
     {
-        enemyBase = GameObject.Find("Base");
+        GameObject[] gameObjArr = GameObject.FindGameObjectsWithTag(gameObject.tag);
+        foreach (GameObject obj in gameObjArr)
+        {
+            if (unitType != UnitTypeE.Base && obj.GetComponent<Status>() != null && obj.GetComponent<Status>().unitType == UnitTypeE.Base)
+            {
+                //Debug.Log(obj);
+                enemyBase = obj.GetComponent<Status>().enemyBase;
+            }
+        }
 
         Component[] meshes = GetComponentsInChildren<MeshRenderer>();
         foreach (MeshRenderer mesh in meshes)

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Move : MonoBehaviour, IAction
 {
-    private Status status;
+    private UnitBrain unitBrain;
     private Vector3 moveDirection;
 
     public ActionE enumID()
@@ -13,7 +13,7 @@ public class Move : MonoBehaviour, IAction
     }
     void Start()
     {
-        status = GetComponent<Status>();
+        unitBrain = GetComponent<UnitBrain>();
     }
 
     public bool ActionCheck(GameObject target)
@@ -30,11 +30,6 @@ public class Move : MonoBehaviour, IAction
 
     public void Action(GameObject target)
     {
-        if (target != null)
-        {
-            moveDirection = Vector3.ProjectOnPlane(transform.position - target.transform.position, transform.up);
-            transform.rotation = Quaternion.LookRotation( -moveDirection, transform.up);
-            transform.position = Vector3.MoveTowards(transform.position, transform.position - moveDirection, status.speed * Time.deltaTime);
-        }
+        unitBrain.MoveToTarget();
     }
 }

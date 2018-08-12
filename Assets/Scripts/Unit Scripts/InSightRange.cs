@@ -24,7 +24,10 @@ public class InSightRange : MonoBehaviour
 
     void OnTriggerEnter(Collider sight)
     {
-        status.inSightRange.Add(sight.gameObject.transform.parent.gameObject);
+        if (sight.gameObject != gameObject)
+        {
+            status.inSightRange.Add(sight.gameObject.transform.parent.gameObject);
+        }
         SightUpdate();
     }
 

@@ -4,12 +4,12 @@ using UnityEngine;
 
 // enums to handle logic gates, unit types, and weapons
 
-public enum UnitTypeE { Command = 0, Factory = 1, Refinery = 2, Automaton = 3 };
-public enum ObjectE { Self = 0, Enemy = 1, Ally = 2, Lowest = 3, Nearest = 4};
+public enum UnitTypeE { Base = 0, Factory = 1, Refinery = 2, Emitter = 3, Turret = 4, Automaton = 5 };
+public enum ObjectE { None = 0, Self = 1, Enemy = 2, Ally = 3, Lowest = 4, Nearest = 5, Unit = 6, EnemyBase = 7};
 public enum ConditionE { Always = 0, LessThanHealth = 1, MoreThanHealth = 2 };
 public enum ActionE { Primary = 0, Secondary = 1, Special = 2, Move = 3,  };
 public enum UnitBuildingE { Unit = 0, Building = 1 };
-public enum PrimaryTypeE { Beam = 0, Laser = 1, Grenade = 2 };
+public enum PrimaryTypeE { Gun = 0, Beam = 1, Grenade = 2 };
 public enum SecondaryTypeE { Rocket = 0, Heal = 1, Lightning = 2, Napalm = 3, Virus = 4 };
 public enum SpecialTypeE { Lightning = 0, Napalm = 1, Virus = 2 };
 public enum StatusE { None = 0, Overload = 1, Oiled = 2, Galvanized = 3, ShortCircuit = 4, Fire = 5, Corrosion = 6, Virus = 7 }
