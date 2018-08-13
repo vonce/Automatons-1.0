@@ -8,15 +8,15 @@ public class TeamColor : MonoBehaviour {
 
     void Start()
     {
-        if (transform.parent.tag == "Blue")
+        if (gameObject.tag == "Blue")
         {
             col = Color.blue;
         }
-        if (transform.parent.tag == "Red")
+        if (gameObject.tag == "Red")
         {
             col = Color.red;
         }
-        if (transform.parent.tag == "Green")
+        if (gameObject.tag == "Green")
         {
             col = Color.green;
         }

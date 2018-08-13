@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 54746919351140734}
   - component: {fileID: 136444492465217004}
   - component: {fileID: 114601225377872474}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,8 +57,8 @@ GameObject:
   - component: {fileID: 33779858587521630}
   - component: {fileID: 23822303180239864}
   - component: {fileID: 114830476315911336}
-  m_Layer: 0
-  m_Name: Back
+  m_Layer: 11
+  m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -238,5 +238,5 @@ CapsuleCollider:
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 3
-  m_Direction: 1
+  m_Direction: 2
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}

@@ -12,7 +12,7 @@ public class Nearest : MonoBehaviour, IObject
     {
         foreach (GameObject obj in list)
         {
-            if (obj != null && Vector3.Distance(gameObject.transform.position, obj.transform.position) < Vector3.Distance(gameObject.transform.position, list[0].transform.position))
+            if (list[0] != null && obj != null && Vector3.Distance(gameObject.transform.position, obj.transform.position) < Vector3.Distance(gameObject.transform.position, list[0].transform.position))
             {
                 list[0] = obj;
             }

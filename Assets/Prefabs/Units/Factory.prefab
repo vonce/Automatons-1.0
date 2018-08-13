@@ -365,7 +365,7 @@ MonoBehaviour:
   inSightRange: []
   filteredInSightRange: []
   unitType: 1
-  primaryType: 0
+  primaryType: 2
   secondaryType: 0
   specialType: 0
   buildable: 0

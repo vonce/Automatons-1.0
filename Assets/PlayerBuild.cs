@@ -13,8 +13,7 @@ public class PlayerBuild : MonoBehaviour {
     private GameObject emitterPrefab;
     [SerializeField]
     private GameObject turretPrefab;
-    [SerializeField]
-    private bool isBuilding = false;
+    public bool isBuilding = false;
     private GameObject buildableArea;
     private GameObject building;
     [SerializeField]
@@ -75,11 +74,14 @@ public class PlayerBuild : MonoBehaviour {
                 buildingPreview.tag = gameObject.tag;
                 foreach (MonoBehaviour script in buildingPreview.GetComponents<MonoBehaviour>())
                 {
-                    script.enabled = false;
+                    if (script != buildingPreview.GetComponent<Status>())
+                    {
+                        script.enabled = false;
+                    }
                 }
                 buildingPreview.GetComponentInChildren<MeshRenderer>().material.color = Color.red;
                 buildingPreview.transform.Find("Collider").GetComponent<Collider>().isTrigger = true;
-                buildingPreview.transform.rotation = Quaternion.LookRotation(Vector3.ProjectOnPlane(player.myBase.transform.position - buildingPreview.transform.position, buildingPreview.transform.position), buildingPreview.transform.position);
+                buildingPreview.transform.rotation = Quaternion.LookRotation(-Vector3.ProjectOnPlane(player.myBase.transform.position - buildingPreview.transform.position, buildingPreview.transform.position), buildingPreview.transform.position);
             }
         }
 
@@ -89,7 +91,7 @@ public class PlayerBuild : MonoBehaviour {
             if (Physics.Raycast(playerCamera.ScreenPointToRay(Input.mousePosition), out raycasthit, Mathf.Infinity, moonLayermask) == true && buildingPreview != null)
             {
                 buildingPreview.transform.position = raycasthit.point;
-                buildingPreview.transform.rotation = Quaternion.LookRotation(Vector3.ProjectOnPlane(player.myBase.transform.position - buildingPreview.transform.position, buildingPreview.transform.position), buildingPreview.transform.position);
+                buildingPreview.transform.rotation = Quaternion.LookRotation(-Vector3.ProjectOnPlane(player.myBase.transform.position - buildingPreview.transform.position, buildingPreview.transform.position), buildingPreview.transform.position);
             }
             if (buildingPreview != null && buildingPreview.GetComponent<Status>().buildable == true)
             {

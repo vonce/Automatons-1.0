@@ -14,7 +14,6 @@ public class Player : MonoBehaviour
     public GameObject myBase;
     public GameObject enemyBase;
     public bool done;
-    private List<GameObject> selected = new List<GameObject>();
     public HashSet<GameObject> ownedObjects = new HashSet<GameObject>();
     [SerializeField]
     private GameObject gameUI;
@@ -26,7 +25,7 @@ public class Player : MonoBehaviour
     {
         foreach (GameObject obj in GameObject.FindGameObjectsWithTag(gameObject.tag))
         {
-            if (obj.name != "Player")
+            if (obj.GetComponent<Status>() != null)
             {
                 ownedObjects.Add(obj);
             }
@@ -68,7 +67,7 @@ public class Player : MonoBehaviour
         done = false;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (nextMetal <= Time.time)
         {

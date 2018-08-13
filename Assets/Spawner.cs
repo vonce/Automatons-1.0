@@ -26,6 +26,11 @@ public class Spawner : MonoBehaviour {
             automaton = Instantiate(automatonPrefab, spawnPoint, Quaternion.LookRotation(-(transform.position - status.enemyBase.transform.position), transform.up));
             automaton.tag = gameObject.tag;
             automaton.GetComponent<Status>().enemyBase = status.enemyBase;
+
+            automaton.GetComponent<Status>().primaryType = status.primaryType;
+            automaton.GetComponent<Status>().secondaryType = status.secondaryType;
+            automaton.GetComponent<Status>().specialType = status.specialType;
+
             nextSpawn = spawnInterval + Time.time;
         }
     }

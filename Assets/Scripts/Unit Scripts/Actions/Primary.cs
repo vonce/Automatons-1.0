@@ -5,11 +5,11 @@ using UnityEngine;
 public class Primary : MonoBehaviour, IAction
 {
     [SerializeField]
-    private Rigidbody BulletPrefab;
+    private Rigidbody bulletPrefab;
     [SerializeField]
-    private Rigidbody BeamPrefab;
+    private Rigidbody beamPrefab;
     [SerializeField]
-    private Rigidbody GrenadePrefab;
+    private Rigidbody grenadePrefab;
     private Rigidbody bullet;
     private Rigidbody grenade;
     private Rigidbody beam;
@@ -22,7 +22,6 @@ public class Primary : MonoBehaviour, IAction
     private float grenadeFireRate;
 
     private float nextGunFire;
-    private float nextBeamTick;
     private float nextGrenadeFire;
 
     [SerializeField]
@@ -30,11 +29,8 @@ public class Primary : MonoBehaviour, IAction
 
     private Status status;
     private UnitBrain unitBrain;
-    private Vector3 bulletVector;
-    private Vector3 grenadeVector;
-    private Vector3 beamVector;
-    private float vectorMag;
-    private float targetDistance;
+    private Vector3 targetVector;//weapon to target
+    public float targetDistance;
 
     public ActionE enumID()
     {
@@ -61,9 +57,10 @@ public class Primary : MonoBehaviour, IAction
     {
         if (target != null)
         {
+            targetVector = transform.position - status.target.transform.position;
             targetDistance = Vector3.Distance(status.target.transform.position, transform.position);
             
-            if (status.attackRange < targetDistance)
+            if (status.attackRange < targetDistance && status.primaryType == PrimaryTypeE.Gun)//move to target if out of range
             {
                 unitBrain.MoveToTarget();
             }
@@ -71,44 +68,65 @@ public class Primary : MonoBehaviour, IAction
             {
                 unitBrain.RotateToTarget();
             }
-            /*if (status.attackRange >= targetDistance && Time.time > nextFire && status.primaryType == PrimaryTypeE.Grenade)//Grenade attack
-            {
-                grenadeVector = -(gameObject.transform.position - status.target.transform.position) / 2;
-                grenadeVector += new Vector3(0, 9, 0);
-                grenade = Instantiate(GrenadePrefab, Front.position, Front.rotation) as Rigidbody;
-                grenade.velocity = grenadeVector;
-
-                nextFire = Time.time + (fireRate) * 2;
-            }*/
-
             if (status.attackRange >= targetDistance && Time.time > nextGunFire && status.primaryType == PrimaryTypeE.Gun)//Gun attack
             {
-                bulletVector = gameObject.transform.position - status.target.transform.position;
-                bullet = Instantiate(BulletPrefab, weapon.transform.position, Quaternion.LookRotation(bulletVector));
+                bullet = Instantiate(bulletPrefab, weapon.transform.position, Quaternion.LookRotation(targetVector));
                 bullet.tag = gameObject.tag;
-                bullet.GetComponent<Bullet>().parentUnit = gameObject;
-                bullet.AddForce(-bulletVector.normalized * 500, ForceMode.Force);
+                bullet.GetComponent<Bullet>().attackPower = status.attackPower;
+                bullet.AddForce(-targetVector.normalized * 1000, ForceMode.Force);
 
-                nextGunFire = Time.time + gunFireRate;
+                nextGunFire = gunFireRate + Time.time;
             }
 
-            /*if (status.attackRange >= targetDistance && Time.time > nextFire && status.attackType == AttackTypeE.Beam)//Beam attack
+            if (status.attackRange / 2 < targetDistance && status.primaryType == PrimaryTypeE.Beam)//move to target if out of range
             {
-                beamVector = gameObject.transform.position - status.target.transform.position;
-                if (beam == null)
+                unitBrain.MoveToTarget();
+            }
+            else
+            {
+                unitBrain.RotateToTarget();
+            }
+            if (status.attackRange / 2 >= targetDistance && status.primaryType == PrimaryTypeE.Beam && beam == null)//Beam attack
+            {
                 {
-                    beam = Instantiate(BeamPrefab, Front.position, Quaternion.LookRotation(-beamVector)) as Rigidbody;
+                    beam = Instantiate(beamPrefab, weapon.transform.position, Quaternion.LookRotation(-targetVector));
+                    beam.tag = gameObject.tag;
+                    beam.GetComponent<Beam>().parentUnit = gameObject;
+                    beam.GetComponent<Beam>().target = status.target;
+                    beam.GetComponent<Beam>().tick = beamTickRate;
                 }
-            }*/
+            }
+            if (status.attackRange * 2 < targetDistance && status.primaryType == PrimaryTypeE.Grenade)//move to target if out of range
+            {
+                unitBrain.MoveToTarget();
+            }
+            else
+            {
+                unitBrain.RotateToTarget();
+            }
+            if (status.attackRange * 2 >= targetDistance && Time.time > nextGrenadeFire && status.primaryType == PrimaryTypeE.Grenade)//Grenade attack
+            {
+                targetVector = -(gameObject.transform.position - status.target.transform.position);
+                grenade = Instantiate(grenadePrefab, weapon.transform.position, Quaternion.LookRotation(targetVector));
+                grenade.tag = gameObject.tag;
+                grenade.velocity = targetVector/2;
+                grenade.velocity += status.transform.up * 10;
+
+                nextGrenadeFire = grenadeFireRate + Time.time;
+            }
         }
     }
     void Update()
     {
-        /*if (beam != null && gameObject != null && status.target != null && transform.position - status.target.transform.position != new Vector3(0, 0, 0))
+        if (beam != null && gameObject != null && status.target != null)
         {
-            beam.position = Front.position;
-            beam.rotation = Quaternion.LookRotation(-(transform.position - status.target.transform.position));
-        }*/
+            beam.position = weapon.transform.position;
+            beam.rotation = Quaternion.LookRotation(-(targetVector));
+        }
+        else
+        {
+            Destroy(beam);
+        }
     }
 }
 

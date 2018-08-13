@@ -20,7 +20,7 @@ Material:
     m_TexEnvs:
     - _BumpMap:
         m_Texture: {fileID: 2800000, guid: e6fa04c8de8b4bd44b8bb1fdd43c1117, type: 3}
-        m_Scale: {x: 4, y: 4}
+        m_Scale: {x: 10, y: 10}
         m_Offset: {x: 0, y: 0}
     - _Illum:
         m_Texture: {fileID: 2800000, guid: ddee01e2719a1394d95c1f33ec367a3a, type: 3}
@@ -28,11 +28,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: c9ef83d58e7b1df499c44e9465fc1b3d, type: 3}
-        m_Scale: {x: 5, y: 3}
+        m_Scale: {x: 15, y: 10}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
         m_Texture: {fileID: 2800000, guid: 0955224de7c53c243ad5ca9b3e75bcf8, type: 3}
-        m_Scale: {x: 15, y: 15}
+        m_Scale: {x: 10, y: 10}
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _EdgeLength: 10

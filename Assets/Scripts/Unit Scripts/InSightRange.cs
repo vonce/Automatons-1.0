@@ -10,7 +10,7 @@ public class InSightRange : MonoBehaviour
     void Start()
     {
         status = GetComponentInParent<Status>();
-        status.inSightRange.Add(status.enemyBase);
+        //status.inSightRange.Add(status.enemyBase);
     }
 
     void Update()
@@ -24,7 +24,7 @@ public class InSightRange : MonoBehaviour
 
     void OnTriggerEnter(Collider sight)
     {
-        if (sight.gameObject != gameObject)
+        if (sight.gameObject != gameObject.transform.parent && sight.gameObject != gameObject)
         {
             status.inSightRange.Add(sight.gameObject.transform.parent.gameObject);
         }

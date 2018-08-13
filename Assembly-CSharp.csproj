@@ -61,12 +61,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Beam.cs" />
     <Compile Include="Assets\Bullet.cs" />
     <Compile Include="Assets\ColliderBuildable.cs" />
     <Compile Include="Assets\EventSystemScript.cs" />
+    <Compile Include="Assets\Explosion.cs" />
+    <Compile Include="Assets\Grenade.cs" />
     <Compile Include="Assets\Player.cs" />
     <Compile Include="Assets\PlayerBuild.cs" />
     <Compile Include="Assets\PlayerLogicHandler.cs" />
+    <Compile Include="Assets\PlayerSelect.cs" />
     <Compile Include="Assets\Scripts\Master.cs" />
     <Compile Include="Assets\Scripts\Misc\HealthBarRotate.cs" />
     <Compile Include="Assets\Scripts\Misc\SkyboxRotate.cs" />
@@ -90,6 +94,7 @@
     <Compile Include="Assets\TeamColor.cs" />
     <Compile Include="Assets\TESTDELETE.cs" />
     <Compile Include="Assets\TriggerBuildable.cs" />
+    <Compile Include="Assets\Turret.cs" />
     <None Include="Assets\Canopus-III_Low-Poly_Sci-Fi_Desert_Units_Set\documentation - Low-Poly_Sci-Fi_Desert_Units_Set.txt" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/Vince/Desktop/Automatons 1.0/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>

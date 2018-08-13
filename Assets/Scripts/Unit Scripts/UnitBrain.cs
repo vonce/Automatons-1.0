@@ -79,10 +79,17 @@ public class UnitBrain : MonoBehaviour
             {
                 objectCondition[i].filterList(list);
             }
-
-            if (list.Count >= 1)
+            if (list.Count > 0)
             {
-                return condition.Condition(list[0]);
+                objCheck = list[0];
+                foreach (GameObject obj in list)
+                {
+                    if (obj != null && Vector3.Distance(gameObject.transform.position, obj.transform.position) < Vector3.Distance(gameObject.transform.position, objCheck.transform.position))
+                    {
+                        objCheck = obj;
+                    }
+                }
+                return condition.Condition(objCheck);
             }
             return false;
         }
