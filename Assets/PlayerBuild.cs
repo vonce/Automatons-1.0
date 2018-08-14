@@ -72,6 +72,7 @@ public class PlayerBuild : MonoBehaviour {
             {
                 buildingPreview = Instantiate(building, raycasthit.point, Quaternion.identity);
                 buildingPreview.tag = gameObject.tag;
+                buildingPreview.GetComponent<Status>().logicMatrixEnum = GetComponent<PlayerLogicHandler>().logicMatrixEnum;
                 foreach (MonoBehaviour script in buildingPreview.GetComponents<MonoBehaviour>())
                 {
                     if (script != buildingPreview.GetComponent<Status>())

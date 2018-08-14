@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class StatusHandler : MonoBehaviour
 {
@@ -56,7 +57,7 @@ public class StatusHandler : MonoBehaviour
         SetSpecialBar((float) currentSpecial / maxSpecial);
     }
 
-    private LogicGateEnum logicGateToEnum(LogicGate logicGate)
+    public LogicGateEnum logicGateToEnum(LogicGate logicGate)
     {
         LogicGateEnum logicGateEnum = new LogicGateEnum();
 
@@ -75,5 +76,52 @@ public class StatusHandler : MonoBehaviour
         }
 
         return logicGateEnum;
+    }
+
+    public LogicGate EnumToLogicGate(LogicGateEnum logicGateEnum)
+    {
+        LogicGate logicGate = new LogicGate();
+
+        logicGate.objectCondition = new IObject[2];
+        logicGate.objectAction = new IObject[2];
+
+        var objects = GetComponents<MonoBehaviour>().OfType<IObject>();
+        var conditions = GetComponents<MonoBehaviour>().OfType<ICondition>();
+        var actions = GetComponents<MonoBehaviour>().OfType<IAction>();
+
+        foreach (IObject obj in objects)
+        {
+            if (logicGateEnum.objectCondition[0] == obj.enumID())
+            {
+                logicGate.objectCondition[0] = obj;
+            }
+            if (logicGateEnum.objectCondition[1] == obj.enumID())
+            {
+                logicGate.objectCondition[1] = obj;
+            }
+            if (logicGateEnum.objectAction[0] == obj.enumID())
+            {
+                logicGate.objectAction[0] = obj;
+            }
+            if (logicGateEnum.objectAction[1] == obj.enumID())
+            {
+                logicGate.objectAction[1] = obj;
+            }
+        }
+        foreach (ICondition cond in conditions)
+        {
+            if (logicGateEnum.condition == cond.enumID())
+            {
+                logicGate.condition = cond;
+            }
+        }
+        foreach (IAction act in actions)
+        {
+            if (logicGateEnum.action == act.enumID())
+            {
+                logicGate.action = act;
+            }
+        }
+        return logicGate;
     }
 }

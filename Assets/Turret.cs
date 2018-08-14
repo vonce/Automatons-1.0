@@ -5,7 +5,6 @@ using UnityEngine;
 public class Turret : MonoBehaviour {
 
     private Status status;
-    private UnitBrain unitBrain;
     private Vector3 targetVector;
     private Vector3 moveDirection;
     private float targetDistance;
@@ -25,9 +24,9 @@ public class Turret : MonoBehaviour {
     private List<GameObject> list = new List<GameObject>();
 
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
         status = GetComponent<Status>();
-        unitBrain = GetComponent<UnitBrain>();
 	}
 	
 	// Update is called once per frame

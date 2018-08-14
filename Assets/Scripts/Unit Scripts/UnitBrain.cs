@@ -37,10 +37,20 @@ public class UnitBrain : MonoBehaviour
         nextCheck = checkRate + Time.time;
     }
 
+    private void Start()
+    {
+        status.logicMatrix[0] = status.EnumToLogicGate(status.logicMatrixEnum[0]);
+        status.logicMatrix[1] = status.EnumToLogicGate(status.logicMatrixEnum[1]);
+        status.logicMatrix[2] = status.EnumToLogicGate(status.logicMatrixEnum[2]);
+        status.logicMatrix[3] = status.EnumToLogicGate(status.logicMatrixEnum[3]);
+        status.logicMatrix[4] = status.EnumToLogicGate(status.logicMatrixEnum[4]);
+    }
+
     private void Update()
     {
         if (status.logicMatrix != null && nextCheck <= Time.time && status.active == true)
         {
+            status.logicMatrix[0] = status.EnumToLogicGate(status.logicMatrixEnum[0]);
             CheckLogicMatrix();
             nextCheck = checkRate + Time.time;
         }
@@ -84,7 +94,7 @@ public class UnitBrain : MonoBehaviour
                 objCheck = list[0];
                 foreach (GameObject obj in list)
                 {
-                    if (obj != null && Vector3.Distance(gameObject.transform.position, obj.transform.position) < Vector3.Distance(gameObject.transform.position, objCheck.transform.position))
+                    if (objCheck != null && obj != null && Vector3.Distance(gameObject.transform.position, obj.transform.position) < Vector3.Distance(gameObject.transform.position, objCheck.transform.position))
                     {
                         objCheck = obj;
                     }
@@ -114,7 +124,7 @@ public class UnitBrain : MonoBehaviour
                 objCheck = list[0];
                 foreach (GameObject obj in list)
                 {
-                    if (obj != null && Vector3.Distance(gameObject.transform.position, obj.transform.position) < Vector3.Distance(gameObject.transform.position, objCheck.transform.position))
+                    if (objCheck != null && obj != null && Vector3.Distance(gameObject.transform.position, obj.transform.position) < Vector3.Distance(gameObject.transform.position, objCheck.transform.position))
                     {
                         objCheck = obj;
                     }

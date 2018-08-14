@@ -15,10 +15,8 @@ public class Player : MonoBehaviour
     public GameObject enemyBase;
     public bool done;
     public HashSet<GameObject> ownedObjects = new HashSet<GameObject>();
-    [SerializeField]
-    private GameObject gameUI;
-    [SerializeField]
-    private GameObject logicMatrixUI;
+    public GameObject gameUI;
+    public GameObject logicMatrixUI;
     
 
     private void Awake()
@@ -35,8 +33,14 @@ public class Player : MonoBehaviour
 
     public void editLogicMatrixUI()
     {
+        GetComponent<PlayerBuild>().isBuilding = false;
         gameUI.SetActive(false);
         logicMatrixUI.SetActive(true);
+        if (GetComponent<PlayerSelect>().selected.Count > 0)
+        {
+            Status objStatus = GetComponent<PlayerSelect>().selected[0].GetComponent<Status>();
+            GetComponent<PlayerLogicHandler>().SetDropdowns(objStatus.logicMatrixEnum, objStatus.primaryType, objStatus.secondaryType, objStatus.specialType);
+        }
     }
     public void backToGameUI()
     {
@@ -57,6 +61,7 @@ public class Player : MonoBehaviour
 
     public void nextDay()
     {
+        GetComponent<PlayerBuild>().isBuilding = false;
         gameUI.SetActive(false);
         done = true;
     }

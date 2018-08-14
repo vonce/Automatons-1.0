@@ -6,9 +6,11 @@ using UnityEngine;
 
 public class Status : StatusHandler
 {
-    public LogicGateEnum[] LogicMatrixEnum = new LogicGateEnum[6];
+    public bool buildable = false;//used for knowing buildable areas
+    public bool colliding = false;//" "
+    public bool selected = false;
+    public LogicGateEnum[] logicMatrixEnum = new LogicGateEnum[6];
     public LogicGate[] logicMatrix = new LogicGate[6];
-    [SerializeField]
     public IAction action; //action gameObject is taking
     public GameObject target; //target of gameObject
     public GameObject enemyBase;//enemyBase
@@ -20,8 +22,6 @@ public class Status : StatusHandler
     public SecondaryTypeE secondaryType;//secondary weapon type
     public SpecialTypeE specialType;//special type
     public HashSet<StatusE> statusEffects;//hashset of status effects on unit
-    public bool buildable = false;//used for knowing buildable areas
-    public bool colliding = false;//" "
     [SerializeField]
     private Material blue;
     [SerializeField]
