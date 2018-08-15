@@ -43,9 +43,6 @@ public class UnitBrain : MonoBehaviour
         status.logicMatrix[1] = status.EnumToLogicGate(status.logicMatrixEnum[1]);
         status.logicMatrix[2] = status.EnumToLogicGate(status.logicMatrixEnum[2]);
         status.logicMatrix[3] = status.EnumToLogicGate(status.logicMatrixEnum[3]);
-
-        Debug.Log(status.logicMatrix[0].objectCondition);
-        Debug.Log(status.logicMatrixEnum[0].objectCondition);
     }
 
     private void Update()
@@ -54,6 +51,10 @@ public class UnitBrain : MonoBehaviour
         {
             CheckLogicMatrix();
             nextCheck = checkRate + Time.time;
+            if (status.target != null)
+            {
+                Debug.Log(status.target.transform.position + "++++++++CHECK");
+            }
         }
     }
 
@@ -67,20 +68,21 @@ public class UnitBrain : MonoBehaviour
 
     public void CheckLogicMatrix()//iterates through all logic matrices 
     {
-        int j = 0;
         foreach (LogicGate logicGate in status.logicMatrix)
         {
             if (CheckCondition(logicGate.objectCondition, logicGate.objectConditionOption, logicGate.condition, logicGate.conditionOption) == true)
             {
                 if (CheckAction(logicGate.objectAction, logicGate.objectActionOption, logicGate.action, logicGate.actionOption) == true)
                 {
+                    if (status.target != null)
+                    {
+                        Debug.Log(status.target.transform.position + "++++++++CHECK");
+                    }
                     status.action = logicGate.action;
                     status.target = logicGate.objectAction.Object(status.inSightRange, logicGate.objectActionOption);
-                    activeActionOption = logicGate.actionOption;
                     break;
                 }
             }
-            j++;
         }
     }
 
@@ -102,11 +104,18 @@ public class UnitBrain : MonoBehaviour
     {
         if (objectAction != null && action != null)
         {
+            if (status.target != null)
+            {
+                Debug.Log(status.target.transform.position + "CHECK ACTION TRUE");
+            }
             return action.ActionCheck(objectAction.Object(status.inSightRange, objectActionOption), actionOption);
-
         }
         else
         {
+            if (status.target != null)
+            {
+                Debug.Log(status.target.transform.position + "CHECK ACTION FALSE");
+            }
             return false;
         }
     }

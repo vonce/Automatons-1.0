@@ -47,7 +47,7 @@ public class Allied : MonoBehaviour, IObject
         }
         if (option == (int)ObjectOptionE.Base)
         {
-            return GetComponent<Status>().enemyBase;
+            return GetComponent<Status>().allyBase;
         }
         if (option == (int)ObjectOptionE.Factory)
         {
@@ -104,7 +104,12 @@ public class Allied : MonoBehaviour, IObject
                 }
             }
         }
-        GameObject closest = null;
+        GameObject closest = new GameObject();
+        
+        if (GetComponent<Status>().target != null)
+        {
+            Debug.Log(GetComponent<Status>().target.transform.position + "allied script 1");
+        }
         float dist = Mathf.Infinity;
         foreach (GameObject obj in alliedSet)
         {
@@ -118,6 +123,10 @@ public class Allied : MonoBehaviour, IObject
                     closest = obj;
                 }
             }
+        }
+        if (GetComponent<Status>().target != null)
+        {
+            Debug.Log(GetComponent<Status>().target.transform.position + "allied script 2");
         }
         return closest;
     }

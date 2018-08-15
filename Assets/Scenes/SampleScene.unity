@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.042170927, g: 0.033753954, b: 0.023614945, a: 1}
+  m_IndirectSpecularColor: {r: 0.052674264, g: 0.042400137, b: 0.030442603, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1120,6 +1120,36 @@ Prefab:
       propertyPath: enemyBase
       value: 
       objectReference: {fileID: 980618305}
+    - target: {fileID: 114437955749966370, guid: 70b6f13e9f1ed7e4fa5ad80ebfa22068,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1643a41dfc6061b40a27918d3e3add68,
+        type: 3}
+    - target: {fileID: 114607077662348064, guid: 70b6f13e9f1ed7e4fa5ad80ebfa22068,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 842785a33a690314da4d3f189c241dd9,
+        type: 3}
+    - target: {fileID: 114541476242544164, guid: 70b6f13e9f1ed7e4fa5ad80ebfa22068,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 842785a33a690314da4d3f189c241dd9,
+        type: 3}
+    - target: {fileID: 114383514383391342, guid: 70b6f13e9f1ed7e4fa5ad80ebfa22068,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 842785a33a690314da4d3f189c241dd9,
+        type: 3}
+    - target: {fileID: 114483931715630288, guid: 70b6f13e9f1ed7e4fa5ad80ebfa22068,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 842785a33a690314da4d3f189c241dd9,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 70b6f13e9f1ed7e4fa5ad80ebfa22068, type: 2}
   m_IsPrefabAsset: 0
