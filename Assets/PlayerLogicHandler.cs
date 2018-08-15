@@ -5,7 +5,10 @@ using UnityEngine.UI;
 
 public class PlayerLogicHandler : MonoBehaviour {
 
-    public LogicGateEnum[] logicMatrixEnum = new LogicGateEnum[6];
+    public LogicGateEnum[] logicMatrixEnum = new LogicGateEnum[4];
+    public LogicGateEnum[] defaultLogicMatrixEnum = new LogicGateEnum[4];
+    private LogicGateEnum[] copiedLogicMatrixEnum = new LogicGateEnum[4];
+    private Dictionary<System.Enum, System.Enum> enumDictionary = new Dictionary<System.Enum, System.Enum>();
 
     [SerializeField]
     private CanvasRenderer copyButton;
@@ -14,375 +17,287 @@ public class PlayerLogicHandler : MonoBehaviour {
 
     private PlayerSelect playerSelect;
 
-    private PrimaryTypeE primaryType;
-    private SecondaryTypeE secondaryType;
-    private SpecialTypeE specialType;
+    [SerializeField]
+    private Dropdown objectConditionDropdown0;
+    [SerializeField]
+    private Dropdown objectConditionOptionDropdown0;
+    [SerializeField]
+    private Dropdown conditionDropdown0;
+    [SerializeField]
+    private Dropdown conditionOptionDropdown0;
+    [SerializeField]
+    private Dropdown actionDropdown0;
+    [SerializeField]
+    private Dropdown actionOptionDropdown0;
+    [SerializeField]
+    private Dropdown objectActionDropdown0;
+    [SerializeField]
+    private Dropdown objectActionOptionDropdown0;
 
     [SerializeField]
-    private Dropdown primaryTypeDropdown;
+    private Dropdown objectConditionDropdown1;
     [SerializeField]
-    private Dropdown secondaryTypeDropdown;
-    [SerializeField]
-    private Dropdown specialTypeDropdown;
-
-    [SerializeField]
-    private Dropdown objectConditionDropdownA1;
-    [SerializeField]
-    private Dropdown objectConditionDropdownB1;
+    private Dropdown objectConditionOptionDropdown1;
     [SerializeField]
     private Dropdown conditionDropdown1;
     [SerializeField]
+    private Dropdown conditionOptionDropdown1;
+    [SerializeField]
     private Dropdown actionDropdown1;
     [SerializeField]
-    private Dropdown objectActionDropdownA1;
+    private Dropdown actionOptionDropdown1;
     [SerializeField]
-    private Dropdown objectActionDropdownB1;
+    private Dropdown objectActionDropdown1;
+    [SerializeField]
+    private Dropdown objectActionOptionDropdown1;
 
     [SerializeField]
-    private Dropdown objectConditionDropdownA2;
+    private Dropdown objectConditionDropdown2;
     [SerializeField]
-    private Dropdown objectConditionDropdownB2;
+    private Dropdown objectConditionOptionDropdown2;
     [SerializeField]
     private Dropdown conditionDropdown2;
     [SerializeField]
+    private Dropdown conditionOptionDropdown2;
+    [SerializeField]
     private Dropdown actionDropdown2;
     [SerializeField]
-    private Dropdown objectActionDropdownA2;
+    private Dropdown actionOptionDropdown2;
     [SerializeField]
-    private Dropdown objectActionDropdownB2;
-
+    private Dropdown objectActionDropdown2;
     [SerializeField]
-    private Dropdown objectConditionDropdownA3;
-    [SerializeField]
-    private Dropdown objectConditionDropdownB3;
-    [SerializeField]
-    private Dropdown conditionDropdown3;
-    [SerializeField]
-    private Dropdown actionDropdown3;
-    [SerializeField]
-    private Dropdown objectActionDropdownA3;
-    [SerializeField]
-    private Dropdown objectActionDropdownB3;
-
-    [SerializeField]
-    private Dropdown objectConditionDropdownA4;
-    [SerializeField]
-    private Dropdown objectConditionDropdownB4;
-    [SerializeField]
-    private Dropdown conditionDropdown4;
-    [SerializeField]
-    private Dropdown actionDropdown4;
-    [SerializeField]
-    private Dropdown objectActionDropdownA4;
-    [SerializeField]
-    private Dropdown objectActionDropdownB4;
-
-    [SerializeField]
-    private Dropdown objectConditionDropdownA5;
-    [SerializeField]
-    private Dropdown objectConditionDropdownB5;
-    [SerializeField]
-    private Dropdown conditionDropdown5;
-    [SerializeField]
-    private Dropdown actionDropdown5;
-    [SerializeField]
-    private Dropdown objectActionDropdownA5;
-    [SerializeField]
-    private Dropdown objectActionDropdownB5;
+    private Dropdown objectActionOptionDropdown2;
 
     //populate dropdown menus with enum values
-    void PrimaryDropdown(Dropdown dropdown)
+    void EnumDropdown(Dropdown dropdown, System.Enum e)
     {
         List<string> objlistnames = new List<string>();
-        string[] objnames = PrimaryTypeE.GetNames(typeof(PrimaryTypeE));
+        var objnames = System.Enum.GetNames(e.GetType());
         foreach (string i in objnames)
         {
-            objlistnames.Add(i);
+            if (i == "None")
+            {
+                objlistnames.Add("-");
+            }
+            else
+            {
+                objlistnames.Add(i);
+            }
         }
         dropdown.ClearOptions();
         dropdown.AddOptions(objlistnames);
-    }
-
-    void SecondaryDropdown(Dropdown dropdown)
-    {
-        List<string> objlistnames = new List<string>();
-        string[] objnames = SecondaryTypeE.GetNames(typeof(SecondaryTypeE));
-        foreach (string i in objnames)
-        {
-            objlistnames.Add(i);
-        }
-        dropdown.ClearOptions();
-        dropdown.AddOptions(objlistnames);
-    }
-
-    void SpecialDropdown(Dropdown dropdown)
-    {
-        List<string> objlistnames = new List<string>();
-        string[] objnames = SpecialTypeE.GetNames(typeof(SpecialTypeE));
-        foreach (string i in objnames)
-        {
-            objlistnames.Add(i);
-        }
-        dropdown.ClearOptions();
-        dropdown.AddOptions(objlistnames);
-    }
-
-    void ObjectDropdown(Dropdown dropdown)
-    {
-        List<string> objlistnames = new List<string>();
-        string[] objnames = ObjectE.GetNames(typeof(ObjectE));
-        foreach (string i in objnames)
-        {
-            objlistnames.Add(i);
-        }
-        dropdown.ClearOptions();
-        dropdown.AddOptions(objlistnames);
-    }
-
-    void ConditionDropdown(Dropdown dropdown)
-    {
-        List<string> condlistnames = new List<string>();
-        string[] condnames = ConditionE.GetNames(typeof(ConditionE));
-        foreach (string i in condnames)
-        {
-            condlistnames.Add(i);
-        }
-        dropdown.ClearOptions();
-        dropdown.AddOptions(condlistnames);
-    }
-
-    void ActionDropdown(Dropdown dropdown)
-    {
-        List<string> actlistnames = new List<string>();
-        string[] actnames = ActionE.GetNames(typeof(ActionE));
-        foreach (string i in actnames)
-        {
-            actlistnames.Add(i);
-        }
-        dropdown.ClearOptions();
-        dropdown.AddOptions(actlistnames);
     }
 
     private void Awake()
     {
+        enumDictionary.Add(ObjectE.Self, NoneE.None);//pair enums with other enums for lookups to change option dropdown
+        enumDictionary.Add(ObjectE.Enemy, ObjectOptionE.Automaton);
+        enumDictionary.Add(ObjectE.Allied, ObjectOptionE.Automaton);
+
+        enumDictionary.Add(ConditionE.Always, NoneE.None);
+        enumDictionary.Add(ConditionE.LessThanHealth, PercentE.ZeroPct);
+        enumDictionary.Add(ConditionE.MoreThanHealth, PercentE.ZeroPct);
+
+        enumDictionary.Add(ActionE.Move, NoneE.None);
+        enumDictionary.Add(ActionE.Primary, PrimaryTypeE.Gun);
+        enumDictionary.Add(ActionE.Secondary, SecondaryTypeE.Rocket);
+        enumDictionary.Add(ActionE.Special, SpecialTypeE.Lightning);
+
         playerSelect = gameObject.GetComponent<PlayerSelect>();
 
-        primaryTypeDropdown.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
-        secondaryTypeDropdown.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
-        specialTypeDropdown.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
+        objectConditionDropdown0.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
+        objectConditionOptionDropdown0.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
+        objectConditionDropdown1.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
+        objectConditionOptionDropdown1.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
+        objectConditionDropdown2.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
+        objectConditionOptionDropdown2.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
 
-        objectConditionDropdownA1.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
-        objectConditionDropdownB1.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
-        objectConditionDropdownA2.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
-        objectConditionDropdownB2.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
-        objectConditionDropdownA3.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
-        objectConditionDropdownB3.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
-        objectConditionDropdownA4.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
-        objectConditionDropdownB4.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
-        objectConditionDropdownA5.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
-        objectConditionDropdownB5.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
-
+        conditionDropdown0.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
+        conditionOptionDropdown0.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
         conditionDropdown1.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
+        conditionOptionDropdown1.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
         conditionDropdown2.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
-        conditionDropdown3.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
-        conditionDropdown4.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
-        conditionDropdown5.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
+        conditionOptionDropdown2.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
 
+
+        actionDropdown0.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
+        actionOptionDropdown0.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
         actionDropdown1.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
+        actionOptionDropdown1.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
         actionDropdown2.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
-        actionDropdown3.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
-        actionDropdown4.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
-        actionDropdown5.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
+        actionOptionDropdown2.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
 
-        objectActionDropdownA1.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
-        objectActionDropdownB1.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
-        objectActionDropdownA2.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
-        objectActionDropdownB2.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
-        objectActionDropdownA3.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
-        objectActionDropdownB3.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
-        objectActionDropdownA4.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
-        objectActionDropdownB4.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
-        objectActionDropdownA5.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
-        objectActionDropdownB5.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
+        objectActionDropdown0.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
+        objectActionOptionDropdown0.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
+        objectActionDropdown1.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
+        objectActionOptionDropdown1.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
+        objectActionDropdown2.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
+        objectActionOptionDropdown2.onValueChanged.AddListener(delegate { DropdownValueChanged(); });
 
-        PrimaryDropdown(primaryTypeDropdown);
-        SecondaryDropdown(secondaryTypeDropdown);
-        SpecialDropdown(specialTypeDropdown);
+        EnumDropdown(objectConditionDropdown0, ObjectE.Enemy);
+        EnumDropdown(objectConditionDropdown1, ObjectE.Enemy);
+        EnumDropdown(objectConditionDropdown2, ObjectE.Enemy);
 
-        ObjectDropdown(objectConditionDropdownA1);
-        ObjectDropdown(objectConditionDropdownB1);
-        ObjectDropdown(objectConditionDropdownA2);
-        ObjectDropdown(objectConditionDropdownB2);
-        ObjectDropdown(objectConditionDropdownA3);
-        ObjectDropdown(objectConditionDropdownB3);
-        ObjectDropdown(objectConditionDropdownA4);
-        ObjectDropdown(objectConditionDropdownB4);
-        ObjectDropdown(objectConditionDropdownA5);
-        ObjectDropdown(objectConditionDropdownB5);
+        EnumDropdown(conditionDropdown0, ConditionE.Always);
+        EnumDropdown(conditionDropdown1, ConditionE.Always);
+        EnumDropdown(conditionDropdown2, ConditionE.Always);
+
+        EnumDropdown(actionDropdown0, ActionE.Move);
+        EnumDropdown(actionDropdown1, ActionE.Move);
+        EnumDropdown(actionDropdown2, ActionE.Move);
+
+        EnumDropdown(objectActionDropdown0, ObjectE.Enemy);
+        EnumDropdown(objectActionDropdown1, ObjectE.Enemy);
+        EnumDropdown(objectActionDropdown2, ObjectE.Enemy);
         
-        ConditionDropdown(conditionDropdown1);
-        ConditionDropdown(conditionDropdown2);
-        ConditionDropdown(conditionDropdown3);
-        ConditionDropdown(conditionDropdown4);
-        ConditionDropdown(conditionDropdown5);
+        defaultLogicMatrixEnum[0] = LogicGateEnumChange((ObjectE)objectConditionDropdown0.value, objectConditionOptionDropdown0.value, (ConditionE)conditionDropdown0.value, conditionOptionDropdown0.value, (ActionE)actionDropdown0.value, actionDropdown0.value, ObjectE.Enemy, (int)ObjectOptionE.Nearest);
+        defaultLogicMatrixEnum[1] = LogicGateEnumChange((ObjectE)objectConditionDropdown1.value, objectConditionOptionDropdown1.value, (ConditionE)conditionDropdown1.value, conditionOptionDropdown1.value, (ActionE)actionDropdown1.value, actionDropdown1.value, ObjectE.Enemy, (int)ObjectOptionE.Base);
+        defaultLogicMatrixEnum[2] = LogicGateEnumChange((ObjectE)objectConditionDropdown2.value, objectConditionOptionDropdown2.value, (ConditionE)conditionDropdown2.value, conditionOptionDropdown2.value, (ActionE)actionDropdown2.value, actionDropdown2.value, ObjectE.Enemy, (int)ObjectOptionE.Base);
+        defaultLogicMatrixEnum[3] = LogicGateEnumChange((ObjectE)objectConditionDropdown2.value, objectConditionOptionDropdown2.value, (ConditionE)conditionDropdown2.value, conditionOptionDropdown2.value, (ActionE)actionDropdown2.value, actionDropdown2.value, ObjectE.Enemy, (int)ObjectOptionE.Base);
 
-        ActionDropdown(actionDropdown1);
-        ActionDropdown(actionDropdown2);
-        ActionDropdown(actionDropdown3);
-        ActionDropdown(actionDropdown4);
-        ActionDropdown(actionDropdown5);
-
-        ObjectDropdown(objectActionDropdownA1);
-        ObjectDropdown(objectActionDropdownB1);
-        ObjectDropdown(objectActionDropdownA2);
-        ObjectDropdown(objectActionDropdownB2);
-        ObjectDropdown(objectActionDropdownA3);
-        ObjectDropdown(objectActionDropdownB3);
-        ObjectDropdown(objectActionDropdownA4);
-        ObjectDropdown(objectActionDropdownB4);
-        ObjectDropdown(objectActionDropdownA5);
-        ObjectDropdown(objectActionDropdownB5);
-
+        logicMatrixEnum = defaultLogicMatrixEnum;
+        SetDropdowns(logicMatrixEnum);
         Apply();
     }
 
     void DropdownValueChanged ()
     {
-        if (primaryTypeDropdown.value != (int)primaryType) { primaryTypeDropdown.captionText.color = Color.red; } else { primaryTypeDropdown.captionText.color = Color.green; }
-        if (secondaryTypeDropdown.value != (int)secondaryType) { secondaryTypeDropdown.captionText.color = Color.red; } else { secondaryTypeDropdown.captionText.color = Color.green; }
-        if (specialTypeDropdown.value != (int)specialType) { specialTypeDropdown.captionText.color = Color.red; } else { specialTypeDropdown.captionText.color = Color.green; }
+        System.Enum e;
 
-        if (objectConditionDropdownA1.value != (int)logicMatrixEnum[0].objectCondition[0]) { objectConditionDropdownA1.captionText.color = Color.red; } else { objectConditionDropdownA1.captionText.color = Color.green; }
-        if (objectConditionDropdownB1.value != (int)logicMatrixEnum[0].objectCondition[1]) { objectConditionDropdownB1.captionText.color = Color.red; } else { objectConditionDropdownB1.captionText.color = Color.green; }
-        if (conditionDropdown1.value != (int)logicMatrixEnum[0].condition) { conditionDropdown1.captionText.color = Color.red; } else { conditionDropdown1.captionText.color = Color.green; }
-        if (actionDropdown1.value != (int)logicMatrixEnum[0].action) { actionDropdown1.captionText.color = Color.red; } else { actionDropdown1.captionText.color = Color.green; }
-        if (objectActionDropdownA1.value != (int)logicMatrixEnum[0].objectAction[0]) { objectActionDropdownA1.captionText.color = Color.red; } else { objectActionDropdownA1.captionText.color = Color.green; }
-        if (objectActionDropdownB1.value != (int)logicMatrixEnum[0].objectAction[1]) { objectActionDropdownB1.captionText.color = Color.red; } else { objectActionDropdownB1.captionText.color = Color.green; }
+        enumDictionary.TryGetValue((ObjectE)objectConditionDropdown0.value, out e);
+        EnumDropdown(objectConditionOptionDropdown0, e);
+        enumDictionary.TryGetValue((ConditionE)conditionDropdown0.value, out e);
+        EnumDropdown(conditionOptionDropdown0, e);
+        enumDictionary.TryGetValue((ActionE)actionDropdown0.value, out e);
+        EnumDropdown(actionOptionDropdown0, e);
+        enumDictionary.TryGetValue((ObjectE)objectActionDropdown0.value, out e);
+        EnumDropdown(objectActionOptionDropdown0, e);
 
-        if (objectConditionDropdownA2.value != (int)logicMatrixEnum[1].objectCondition[0]) { objectConditionDropdownA2.captionText.color = Color.red; } else { objectConditionDropdownA2.captionText.color = Color.green; }
-        if (objectConditionDropdownB2.value != (int)logicMatrixEnum[1].objectCondition[1]) { objectConditionDropdownB2.captionText.color = Color.red; } else { objectConditionDropdownB2.captionText.color = Color.green; }
-        if (conditionDropdown2.value != (int)logicMatrixEnum[1].condition) { conditionDropdown2.captionText.color = Color.red; } else { conditionDropdown2.captionText.color = Color.green; }
-        if (actionDropdown2.value != (int)logicMatrixEnum[1].action) { actionDropdown2.captionText.color = Color.red; } else { actionDropdown2.captionText.color = Color.green; }
-        if (objectActionDropdownA2.value != (int)logicMatrixEnum[1].objectAction[0]) { objectActionDropdownA2.captionText.color = Color.red; } else { objectActionDropdownA2.captionText.color = Color.green; }
-        if (objectActionDropdownB2.value != (int)logicMatrixEnum[1].objectAction[1]) { objectActionDropdownB2.captionText.color = Color.red; } else { objectActionDropdownB2.captionText.color = Color.green; }
+        enumDictionary.TryGetValue((ObjectE)objectConditionDropdown1.value, out e);
+        EnumDropdown(objectConditionOptionDropdown1, e);
+        enumDictionary.TryGetValue((ConditionE)conditionDropdown1.value, out e);
+        EnumDropdown(conditionOptionDropdown1, e);
+        enumDictionary.TryGetValue((ActionE)actionDropdown1.value, out e);
+        EnumDropdown(actionOptionDropdown1, e);
+        enumDictionary.TryGetValue((ObjectE)objectActionDropdown1.value, out e);
+        EnumDropdown(objectActionOptionDropdown1, e);
 
-        if (objectConditionDropdownA3.value != (int)logicMatrixEnum[2].objectCondition[0]) { objectConditionDropdownA3.captionText.color = Color.red; } else { objectConditionDropdownA3.captionText.color = Color.green; }
-        if (objectConditionDropdownB3.value != (int)logicMatrixEnum[2].objectCondition[1]) { objectConditionDropdownB3.captionText.color = Color.red; } else { objectConditionDropdownB3.captionText.color = Color.green; }
-        if (conditionDropdown3.value != (int)logicMatrixEnum[2].condition) { conditionDropdown3.captionText.color = Color.red; } else { conditionDropdown3.captionText.color = Color.green; }
-        if (actionDropdown3.value != (int)logicMatrixEnum[2].action) { actionDropdown3.captionText.color = Color.red; } else { actionDropdown3.captionText.color = Color.green; }
-        if (objectActionDropdownA3.value != (int)logicMatrixEnum[2].objectAction[0]) { objectActionDropdownA3.captionText.color = Color.red; } else { objectActionDropdownA3.captionText.color = Color.green; }
-        if (objectActionDropdownB3.value != (int)logicMatrixEnum[2].objectAction[1]) { objectActionDropdownB3.captionText.color = Color.red; } else { objectActionDropdownB3.captionText.color = Color.green; }
+        enumDictionary.TryGetValue((ObjectE)objectConditionDropdown2.value, out e);
+        EnumDropdown(objectConditionOptionDropdown2, e);
+        enumDictionary.TryGetValue((ConditionE)conditionDropdown2.value, out e);
+        EnumDropdown(conditionOptionDropdown2, e);
+        enumDictionary.TryGetValue((ActionE)actionDropdown2.value, out e);
+        EnumDropdown(actionOptionDropdown2, e);
+        enumDictionary.TryGetValue((ObjectE)objectActionDropdown2.value, out e);
+        EnumDropdown(objectActionOptionDropdown2, e);
 
-        if (objectConditionDropdownA4.value != (int)logicMatrixEnum[3].objectCondition[0]) { objectConditionDropdownA4.captionText.color = Color.red; } else { objectConditionDropdownA4.captionText.color = Color.green; }
-        if (objectConditionDropdownB4.value != (int)logicMatrixEnum[3].objectCondition[1]) { objectConditionDropdownB4.captionText.color = Color.red; } else { objectConditionDropdownB4.captionText.color = Color.green; }
-        if (conditionDropdown4.value != (int)logicMatrixEnum[3].condition) { conditionDropdown4.captionText.color = Color.red; } else { conditionDropdown4.captionText.color = Color.green; }
-        if (actionDropdown4.value != (int)logicMatrixEnum[3].action) { actionDropdown4.captionText.color = Color.red; } else { actionDropdown4.captionText.color = Color.green; }
-        if (objectActionDropdownA4.value != (int)logicMatrixEnum[3].objectAction[0]) { objectActionDropdownA4.captionText.color = Color.red; } else { objectActionDropdownA4.captionText.color = Color.green; }
-        if (objectActionDropdownB4.value != (int)logicMatrixEnum[3].objectAction[1]) { objectActionDropdownB4.captionText.color = Color.red; } else { objectActionDropdownB4.captionText.color = Color.green; }
+        if (objectConditionDropdown0.value != (int)logicMatrixEnum[0].objectCondition) { objectConditionDropdown0.captionText.color = Color.red; } else { objectConditionDropdown0.captionText.color = Color.green; }
+        if (objectConditionOptionDropdown0.value != logicMatrixEnum[0].objectConditionOption) { objectConditionOptionDropdown0.captionText.color = Color.red; } else { objectConditionOptionDropdown0.captionText.color = Color.green; }
+        if (conditionDropdown0.value != (int)logicMatrixEnum[0].condition) { conditionDropdown0.captionText.color = Color.red; } else { conditionDropdown0.captionText.color = Color.green; }
+        if (conditionOptionDropdown0.value != logicMatrixEnum[0].conditionOption) { conditionOptionDropdown0.captionText.color = Color.red; } else { conditionOptionDropdown0.captionText.color = Color.green; }
+        if (actionDropdown0.value != (int)logicMatrixEnum[0].action) { actionDropdown0.captionText.color = Color.red; } else { actionDropdown0.captionText.color = Color.green; }
+        if (actionOptionDropdown0.value != logicMatrixEnum[0].actionOption) { actionOptionDropdown0.captionText.color = Color.red; } else { actionOptionDropdown0.captionText.color = Color.green; }
+        if (objectActionDropdown0.value != (int)logicMatrixEnum[0].objectAction) { objectActionDropdown0.captionText.color = Color.red; } else { objectActionDropdown0.captionText.color = Color.green; }
+        if (objectActionOptionDropdown0.value != logicMatrixEnum[0].objectActionOption) { objectActionOptionDropdown0.captionText.color = Color.red; } else { objectActionOptionDropdown0.captionText.color = Color.green; }
 
-        if (objectConditionDropdownA5.value != (int)logicMatrixEnum[4].objectCondition[0]) { objectConditionDropdownA5.captionText.color = Color.red; } else { objectConditionDropdownA5.captionText.color = Color.green; }
-        if (objectConditionDropdownB5.value != (int)logicMatrixEnum[4].objectCondition[1]) { objectConditionDropdownB5.captionText.color = Color.red; } else { objectConditionDropdownB5.captionText.color = Color.green; }
-        if (conditionDropdown5.value != (int)logicMatrixEnum[4].condition) { conditionDropdown5.captionText.color = Color.red; } else { conditionDropdown5.captionText.color = Color.green; }
-        if (actionDropdown5.value != (int)logicMatrixEnum[4].action) { actionDropdown5.captionText.color = Color.red; } else { actionDropdown5.captionText.color = Color.green; }
-        if (objectActionDropdownA5.value != (int)logicMatrixEnum[4].objectAction[0]) { objectActionDropdownA5.captionText.color = Color.red; } else { objectActionDropdownA5.captionText.color = Color.green; }
-        if (objectActionDropdownB5.value != (int)logicMatrixEnum[4].objectAction[1]) { objectActionDropdownB5.captionText.color = Color.red; } else { objectActionDropdownB5.captionText.color = Color.green; }
+        if (objectConditionDropdown1.value != (int)logicMatrixEnum[1].objectCondition) { objectConditionDropdown1.captionText.color = Color.red; } else { objectConditionDropdown1.captionText.color = Color.green; }
+        if (objectConditionOptionDropdown1.value != logicMatrixEnum[1].objectConditionOption) { objectConditionOptionDropdown1.captionText.color = Color.red; } else { objectConditionOptionDropdown1.captionText.color = Color.green; }
+        if (conditionDropdown1.value != (int)logicMatrixEnum[1].condition) { conditionDropdown1.captionText.color = Color.red; } else { conditionDropdown1.captionText.color = Color.green; }
+        if (conditionOptionDropdown1.value != logicMatrixEnum[1].conditionOption) { conditionOptionDropdown1.captionText.color = Color.red; } else { conditionOptionDropdown1.captionText.color = Color.green; }
+        if (actionDropdown1.value != (int)logicMatrixEnum[1].action) { actionDropdown1.captionText.color = Color.red; } else { actionDropdown1.captionText.color = Color.green; }
+        if (actionOptionDropdown1.value != logicMatrixEnum[1].actionOption) { actionOptionDropdown1.captionText.color = Color.red; } else { actionOptionDropdown1.captionText.color = Color.green; }
+        if (objectActionDropdown1.value != (int)logicMatrixEnum[1].objectAction) { objectActionDropdown1.captionText.color = Color.red; } else { objectActionDropdown1.captionText.color = Color.green; }
+        if (objectActionOptionDropdown1.value != logicMatrixEnum[1].objectActionOption) { objectActionOptionDropdown1.captionText.color = Color.red; } else { objectActionOptionDropdown1.captionText.color = Color.green; }
+
+        if (objectConditionDropdown2.value != (int)logicMatrixEnum[2].objectCondition) { objectConditionDropdown2.captionText.color = Color.red; } else { objectConditionDropdown2.captionText.color = Color.green; }
+        if (objectConditionOptionDropdown2.value != logicMatrixEnum[2].objectConditionOption) { objectConditionOptionDropdown2.captionText.color = Color.red; } else { objectConditionOptionDropdown2.captionText.color = Color.green; }
+        if (conditionDropdown2.value != (int)logicMatrixEnum[2].condition) { conditionDropdown2.captionText.color = Color.red; } else { conditionDropdown2.captionText.color = Color.green; }
+        if (conditionOptionDropdown2.value != logicMatrixEnum[2].conditionOption) { conditionOptionDropdown2.captionText.color = Color.red; } else { conditionOptionDropdown2.captionText.color = Color.green; }
+        if (actionDropdown2.value != (int)logicMatrixEnum[2].action) { actionDropdown2.captionText.color = Color.red; } else { actionDropdown2.captionText.color = Color.green; }
+        if (actionOptionDropdown2.value != logicMatrixEnum[2].actionOption) { actionOptionDropdown2.captionText.color = Color.red; } else { actionOptionDropdown2.captionText.color = Color.green; }
+        if (objectActionDropdown2.value != (int)logicMatrixEnum[2].objectAction) { objectActionDropdown2.captionText.color = Color.red; } else { objectActionDropdown2.captionText.color = Color.green; }
+        if (objectActionOptionDropdown2.value != logicMatrixEnum[2].objectActionOption) { objectActionOptionDropdown2.captionText.color = Color.red; } else { objectActionOptionDropdown2.captionText.color = Color.green; }
+
     }
     public void Copy()
     {
-
+        copiedLogicMatrixEnum[0] = LogicGateEnumChange((ObjectE)objectConditionDropdown0.value, objectConditionOptionDropdown0.value, (ConditionE)conditionDropdown0.value, conditionOptionDropdown0.value, (ActionE)actionDropdown0.value, actionDropdown0.value, ObjectE.Enemy, (int)ObjectOptionE.Nearest);
+        copiedLogicMatrixEnum[1] = LogicGateEnumChange((ObjectE)objectConditionDropdown1.value, objectConditionOptionDropdown1.value, (ConditionE)conditionDropdown1.value, conditionOptionDropdown1.value, (ActionE)actionDropdown1.value, actionDropdown1.value, ObjectE.Enemy, (int)ObjectOptionE.Base);
+        copiedLogicMatrixEnum[2] = LogicGateEnumChange((ObjectE)objectConditionDropdown2.value, objectConditionOptionDropdown2.value, (ConditionE)conditionDropdown2.value, conditionOptionDropdown2.value, (ActionE)actionDropdown2.value, actionDropdown2.value, ObjectE.Enemy, (int)ObjectOptionE.Base);
     }
 
     public void Paste()
     {
-
+        SetDropdowns(copiedLogicMatrixEnum);
     }
 
     public void Apply ()
     {
-        primaryType = (PrimaryTypeE)primaryTypeDropdown.value;
-        secondaryType = (SecondaryTypeE)secondaryTypeDropdown.value;
-        specialType = (SpecialTypeE)specialTypeDropdown.value;
-
-        logicMatrixEnum[0] = LogicGateEnumChange((ObjectE)objectConditionDropdownA1.value, (ObjectE)objectConditionDropdownB1.value, (ConditionE)conditionDropdown1.value, (ActionE)actionDropdown1.value, (ObjectE)objectActionDropdownA1.value, (ObjectE)objectActionDropdownB1.value);
-        logicMatrixEnum[1] = LogicGateEnumChange((ObjectE)objectConditionDropdownA2.value, (ObjectE)objectConditionDropdownB2.value, (ConditionE)conditionDropdown2.value, (ActionE)actionDropdown2.value, (ObjectE)objectActionDropdownA2.value, (ObjectE)objectActionDropdownB2.value);
-        logicMatrixEnum[2] = LogicGateEnumChange((ObjectE)objectConditionDropdownA3.value, (ObjectE)objectConditionDropdownB3.value, (ConditionE)conditionDropdown3.value, (ActionE)actionDropdown3.value, (ObjectE)objectActionDropdownA3.value, (ObjectE)objectActionDropdownB3.value);
-        logicMatrixEnum[3] = LogicGateEnumChange((ObjectE)objectConditionDropdownA4.value, (ObjectE)objectConditionDropdownB4.value, (ConditionE)conditionDropdown4.value, (ActionE)actionDropdown4.value, (ObjectE)objectActionDropdownA4.value, (ObjectE)objectActionDropdownB4.value);
-        logicMatrixEnum[4] = LogicGateEnumChange((ObjectE)objectConditionDropdownA5.value, (ObjectE)objectConditionDropdownB5.value, (ConditionE)conditionDropdown5.value, (ActionE)actionDropdown5.value, (ObjectE)objectActionDropdownA5.value, (ObjectE)objectActionDropdownB5.value);
-
+        logicMatrixEnum[0] = LogicGateEnumChange((ObjectE)objectConditionDropdown0.value, objectConditionOptionDropdown0.value, (ConditionE)conditionDropdown0.value, conditionOptionDropdown0.value, (ActionE)actionDropdown0.value, actionDropdown0.value, (ObjectE)objectActionDropdown0.value, objectActionOptionDropdown0.value);
+        logicMatrixEnum[1] = LogicGateEnumChange((ObjectE)objectConditionDropdown1.value, objectConditionOptionDropdown1.value, (ConditionE)conditionDropdown1.value, conditionOptionDropdown1.value, (ActionE)actionDropdown1.value, actionDropdown1.value, (ObjectE)objectActionDropdown1.value, objectActionOptionDropdown1.value);
+        logicMatrixEnum[2] = LogicGateEnumChange((ObjectE)objectConditionDropdown2.value, objectConditionOptionDropdown2.value, (ConditionE)conditionDropdown2.value, conditionOptionDropdown2.value, (ActionE)actionDropdown2.value, actionDropdown2.value, (ObjectE)objectActionDropdown2.value, objectActionOptionDropdown2.value);
+        
         if (playerSelect.selected.Count > 0)
         {
             foreach (GameObject obj in playerSelect.selected)
             {
                 obj.GetComponent<Status>().logicMatrixEnum = logicMatrixEnum;
-                obj.GetComponent<Status>().primaryType = (PrimaryTypeE)primaryTypeDropdown.value;
-                obj.GetComponent<Status>().secondaryType = (SecondaryTypeE)secondaryTypeDropdown.value;
-                obj.GetComponent<Status>().specialType = (SpecialTypeE)specialTypeDropdown.value;
             }
         }
+        SetDropdowns(logicMatrixEnum);
+    }
+
+    public void SetStored(LogicGateEnum[] matrix)
+    {
+        logicMatrixEnum = new LogicGateEnum[4];
+        logicMatrixEnum = matrix;
+    }
+
+    public void SetDropdowns (LogicGateEnum[] matrix)
+    {
+        objectConditionDropdown0.value = (int)matrix[0].objectCondition;
+        objectConditionOptionDropdown0.value = (int)matrix[0].objectConditionOption;
+        conditionDropdown0.value = (int)matrix[0].condition;
+        conditionOptionDropdown0.value = (int)matrix[0].conditionOption;
+        actionDropdown0.value = (int)matrix[0].action;
+        actionOptionDropdown0.value = (int)matrix[0].actionOption;
+        objectActionDropdown0.value = (int)matrix[0].objectAction;
+        objectActionOptionDropdown0.value = (int)matrix[0].objectActionOption;
+
+        objectConditionDropdown1.value = (int)matrix[1].objectCondition;
+        objectConditionOptionDropdown1.value = (int)matrix[1].objectConditionOption;
+        conditionDropdown1.value = (int)matrix[1].condition;
+        conditionOptionDropdown1.value = (int)matrix[1].conditionOption;
+        actionDropdown1.value = (int)matrix[1].action;
+        actionOptionDropdown1.value = (int)matrix[1].actionOption;
+        objectActionDropdown1.value = (int)matrix[1].objectAction;
+        objectActionOptionDropdown1.value = (int)matrix[1].objectActionOption;
+
+        objectConditionDropdown2.value = (int)matrix[2].objectCondition;
+        objectConditionOptionDropdown2.value = (int)matrix[2].objectConditionOption;
+        conditionDropdown2.value = (int)matrix[2].condition;
+        conditionOptionDropdown2.value = (int)matrix[2].conditionOption;
+        actionDropdown2.value = (int)matrix[0].action;
+        actionOptionDropdown2.value = (int)matrix[2].actionOption;
+        objectActionDropdown2.value = (int)matrix[2].objectAction;
+        objectActionOptionDropdown2.value = (int)matrix[2].objectActionOption;
+
         DropdownValueChanged();
     }
 
-    public void SetDropdowns (LogicGateEnum[] matrix, PrimaryTypeE primary, SecondaryTypeE secondary, SpecialTypeE special)
+    private LogicGateEnum LogicGateEnumChange(ObjectE objectCondition, int objectConditionOption, ConditionE condition, int conditionOption, ActionE action, int actionOption, ObjectE objectAction, int objectActionOption)
     {
-        primaryType = primary;
-        secondaryType = secondary;
-        specialType = special;
+        LogicGateEnum logicGate = new LogicGateEnum();
 
-        logicMatrixEnum = matrix;
+        logicGate.objectCondition = objectCondition;
+        logicGate.objectConditionOption = objectConditionOption;
+        logicGate.condition = condition;
+        logicGate.conditionOption = conditionOption;
+        logicGate.action = action;
+        logicGate.actionOption = actionOption;
+        logicGate.objectAction = objectAction;
+        logicGate.objectActionOption = objectActionOption;
 
-        primaryTypeDropdown.value = (int)primary;
-        secondaryTypeDropdown.value = (int)secondary;
-        specialTypeDropdown.value = (int)special;
-
-        objectConditionDropdownA1.value = (int)matrix[0].objectCondition[0];
-        objectConditionDropdownB1.value = (int)matrix[0].objectCondition[1];
-        conditionDropdown1.value = (int)matrix[0].condition;
-        actionDropdown1.value = (int)matrix[0].action;
-        objectActionDropdownA1.value = (int)matrix[0].objectAction[0];
-        objectActionDropdownB1.value = (int)matrix[0].objectAction[1];
-
-        objectConditionDropdownA2.value = (int)matrix[1].objectCondition[0];
-        objectConditionDropdownB2.value = (int)matrix[1].objectCondition[1];
-        conditionDropdown2.value = (int)matrix[1].condition;
-        actionDropdown2.value = (int)matrix[1].action;
-        objectActionDropdownA2.value = (int)matrix[1].objectAction[0];
-        objectActionDropdownB2.value = (int)matrix[1].objectAction[1];
-
-        objectConditionDropdownA3.value = (int)matrix[2].objectCondition[0];
-        objectConditionDropdownB3.value = (int)matrix[2].objectCondition[1];
-        conditionDropdown3.value = (int)matrix[2].condition;
-        actionDropdown3.value = (int)matrix[2].action;
-        objectActionDropdownA3.value = (int)matrix[2].objectAction[0];
-        objectActionDropdownB3.value = (int)matrix[2].objectAction[1];
-
-        objectConditionDropdownA4.value = (int)matrix[3].objectCondition[0];
-        objectConditionDropdownB4.value = (int)matrix[3].objectCondition[1];
-        conditionDropdown4.value = (int)matrix[3].condition;
-        actionDropdown4.value = (int)matrix[3].action;
-        objectActionDropdownA4.value = (int)matrix[3].objectAction[0];
-        objectActionDropdownB4.value = (int)matrix[3].objectAction[1];
-
-        objectConditionDropdownA5.value = (int)matrix[4].objectCondition[0];
-        objectConditionDropdownB5.value = (int)matrix[4].objectCondition[1];
-        conditionDropdown5.value = (int)matrix[4].condition;
-        actionDropdown5.value = (int)matrix[4].action;
-        objectActionDropdownA5.value = (int)matrix[4].objectAction[0];
-        objectActionDropdownB5.value = (int)matrix[4].objectAction[1];
-    }
-
-    private LogicGateEnum LogicGateEnumChange(ObjectE objectConditionA, ObjectE objectConditionB, ConditionE condition, ActionE action, ObjectE objectActionA, ObjectE objectActionB)
-    {
-        LogicGateEnum lg = new LogicGateEnum();
-        lg.objectCondition = new ObjectE[2];
-        lg.objectAction = new ObjectE[2];
-
-        lg.objectCondition[0] = objectConditionA;
-        lg.objectCondition[1] = objectConditionB;
-        lg.condition = condition;
-        lg.action = action;
-        lg.objectAction[0] = objectActionA;
-        lg.objectAction[1] = objectActionB;
-
-        return lg;
+        return logicGate;
     }
 }

@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float metalRate;
     private float nextMetal;
-    private int metal = 100;
+    public int metal;
     public GameObject myBase;
     public GameObject enemyBase;
     public bool done;
@@ -39,7 +39,8 @@ public class Player : MonoBehaviour
         if (GetComponent<PlayerSelect>().selected.Count > 0)
         {
             Status objStatus = GetComponent<PlayerSelect>().selected[0].GetComponent<Status>();
-            GetComponent<PlayerLogicHandler>().SetDropdowns(objStatus.logicMatrixEnum, objStatus.primaryType, objStatus.secondaryType, objStatus.specialType);
+            GetComponent<PlayerLogicHandler>().SetStored(objStatus.logicMatrixEnum);
+            GetComponent<PlayerLogicHandler>().SetDropdowns(objStatus.logicMatrixEnum);
         }
     }
     public void backToGameUI()

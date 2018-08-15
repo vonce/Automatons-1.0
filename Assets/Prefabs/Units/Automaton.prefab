@@ -226,15 +226,15 @@ GameObject:
   - component: {fileID: 114170793993879934}
   - component: {fileID: 114832164697960922}
   - component: {fileID: 114699862930398474}
+  - component: {fileID: 114731019452166002}
   - component: {fileID: 114012420242738916}
   - component: {fileID: 114137622204632164}
+  - component: {fileID: 114728994316023748}
+  - component: {fileID: 114353576807870348}
   - component: {fileID: 114998570743611634}
+  - component: {fileID: 114438155215628974}
   - component: {fileID: 114304697204694158}
-  - component: {fileID: 114710341664314046}
-  - component: {fileID: 114784890993102934}
-  - component: {fileID: 114548958143268354}
   - component: {fileID: 114080337565257938}
-  - component: {fileID: 114731019452166002}
   m_Layer: 9
   m_Name: Automaton
   m_TagString: Green
@@ -1822,9 +1822,8 @@ MonoBehaviour:
   selected: 0
   target: {fileID: 0}
   enemyBase: {fileID: 0}
-  inSightRange:
-  - {fileID: 0}
-  filteredInSightRange: []
+  allyBase: {fileID: 0}
+  buildingCost: 0
   unitType: 5
   primaryType: 1
   secondaryType: 0
@@ -1886,6 +1885,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cce181e49be30b4c8ff11f13db7260b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114353576807870348
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1388749449566870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1275a7f3ad7b4fc4ab481545beca0a98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114438155215628974
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1388749449566870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc0d098f32a7ed84aad21fb3d97867ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114480545739340460
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1895,17 +1916,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4f32d9aef5349034489d6bf3dc18ec9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114548958143268354
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1388749449566870}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 756bf962b0ca04043b1c2a99b132f007, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114569175587467938
@@ -1974,7 +1984,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moon: {fileID: 0}
---- !u!114 &114710341664314046
+--- !u!114 &114728994316023748
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1982,7 +1992,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1388749449566870}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cff720cb7f8fb814e9724c8a3c0faf6c, type: 3}
+  m_Script: {fileID: 11500000, guid: b43a00561ca39734d87553f00830fac4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114731019452166002
@@ -2017,17 +2027,6 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
---- !u!114 &114784890993102934
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1388749449566870}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28a56756cefb36a459b3c99b0f9ee9f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114812417787251800
 MonoBehaviour:
   m_ObjectHideFlags: 1

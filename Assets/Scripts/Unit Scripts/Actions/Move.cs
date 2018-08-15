@@ -16,7 +16,7 @@ public class Move : MonoBehaviour, IAction
         unitBrain = GetComponent<UnitBrain>();
     }
 
-    public bool ActionCheck(GameObject target)
+    public bool ActionCheck(GameObject target, int option)
     {
         if (target != null)
         {
@@ -28,7 +28,7 @@ public class Move : MonoBehaviour, IAction
         }
     }
 
-    public void Action(GameObject target)
+    public void Action(GameObject target, int option)
     {
         unitBrain.MoveToTarget();
     }

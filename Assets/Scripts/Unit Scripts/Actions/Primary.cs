@@ -42,7 +42,7 @@ public class Primary : MonoBehaviour, IAction
         unitBrain = GetComponent<UnitBrain>();
     }
 
-    public bool ActionCheck(GameObject target)
+    public bool ActionCheck(GameObject target, int option)
     {
         if (target != null)
         {
@@ -53,7 +53,7 @@ public class Primary : MonoBehaviour, IAction
             return false;
         }
     }
-    public void Action(GameObject target)
+    public void Action(GameObject target, int option)
     {
         if (target != null)
         {
@@ -96,7 +96,7 @@ public class Primary : MonoBehaviour, IAction
                     beam.GetComponent<Beam>().tick = beamTickRate;
                 }
             }
-            if (status.attackRange * 2 < targetDistance && status.primaryType == PrimaryTypeE.Grenade)//move to target if out of range
+            if (status.attackRange * 1.5 < targetDistance && status.primaryType == PrimaryTypeE.Grenade)//move to target if out of range
             {
                 unitBrain.MoveToTarget();
             }
@@ -104,7 +104,7 @@ public class Primary : MonoBehaviour, IAction
             {
                 unitBrain.RotateToTarget();
             }
-            if (status.attackRange * 2 >= targetDistance && Time.time > nextGrenadeFire && status.primaryType == PrimaryTypeE.Grenade)//Grenade attack
+            if (status.attackRange * 1.5 >= targetDistance && Time.time > nextGrenadeFire && status.primaryType == PrimaryTypeE.Grenade)//Grenade attack
             {
                 targetVector = -(gameObject.transform.position - status.target.transform.position);
                 grenade = Instantiate(grenadePrefab, weapon.transform.position, Quaternion.LookRotation(targetVector));

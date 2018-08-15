@@ -8,11 +8,7 @@ public class Always : MonoBehaviour, ICondition
     {
         return ConditionE.Always;
     }
-    public bool Condition(GameObject target)
-    {
-        return true;
-    }
-    public bool Condition(GameObject target, int subOption)
+    public bool Condition(GameObject target, int option)
     {
         return true;
     }

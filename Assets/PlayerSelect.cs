@@ -71,7 +71,6 @@ public class PlayerSelect : MonoBehaviour
             {
                 obj.GetComponent<Status>().selected = true;
                 obj.transform.Find("Selected").gameObject.SetActive(true);
-                Debug.Log(obj);
             }
             SelectedText.text = "Selected: " + selected.Count.ToString();
         }

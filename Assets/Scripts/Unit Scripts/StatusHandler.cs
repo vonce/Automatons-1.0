@@ -61,19 +61,14 @@ public class StatusHandler : MonoBehaviour
     {
         LogicGateEnum logicGateEnum = new LogicGateEnum();
 
-        logicGateEnum.objectCondition = new ObjectE[logicGate.objectCondition.Length];
-        for (int i = 0; i < logicGate.objectCondition.Length; i++)
-        {
-            logicGateEnum.objectCondition[i] = logicGate.objectCondition[i].enumID();
-        }
+        logicGateEnum.objectCondition = logicGate.objectCondition.enumID();
+        logicGateEnum.objectConditionOption = logicGate.objectConditionOption;
         logicGateEnum.condition = logicGate.condition.enumID();
+        logicGateEnum.conditionOption = logicGate.conditionOption;
         logicGateEnum.action = logicGate.action.enumID();
-
-        logicGateEnum.objectAction = new ObjectE[logicGate.objectAction.Length];
-        for (int i = 0; i < logicGate.objectAction.Length; i++)
-        {
-            logicGateEnum.objectAction[i] = logicGate.objectAction[i].enumID();
-        }
+        logicGateEnum.actionOption = logicGate.actionOption;
+        logicGateEnum.objectAction = logicGate.objectAction.enumID();
+        logicGateEnum.objectActionOption = logicGate.objectActionOption;
 
         return logicGateEnum;
     }
@@ -81,31 +76,21 @@ public class StatusHandler : MonoBehaviour
     public LogicGate EnumToLogicGate(LogicGateEnum logicGateEnum)
     {
         LogicGate logicGate = new LogicGate();
-
-        logicGate.objectCondition = new IObject[2];
-        logicGate.objectAction = new IObject[2];
-
+        
         var objects = GetComponents<MonoBehaviour>().OfType<IObject>();
         var conditions = GetComponents<MonoBehaviour>().OfType<ICondition>();
         var actions = GetComponents<MonoBehaviour>().OfType<IAction>();
 
         foreach (IObject obj in objects)
         {
-            if (logicGateEnum.objectCondition[0] == obj.enumID())
+            if (logicGateEnum.objectCondition == obj.enumID())
             {
-                logicGate.objectCondition[0] = obj;
+                logicGate.objectCondition = obj;
             }
-            if (logicGateEnum.objectCondition[1] == obj.enumID())
+
+            if (logicGateEnum.objectAction == obj.enumID())
             {
-                logicGate.objectCondition[1] = obj;
-            }
-            if (logicGateEnum.objectAction[0] == obj.enumID())
-            {
-                logicGate.objectAction[0] = obj;
-            }
-            if (logicGateEnum.objectAction[1] == obj.enumID())
-            {
-                logicGate.objectAction[1] = obj;
+                logicGate.objectAction = obj;
             }
         }
         foreach (ICondition cond in conditions)
@@ -122,6 +107,12 @@ public class StatusHandler : MonoBehaviour
                 logicGate.action = act;
             }
         }
+
+        logicGate.objectConditionOption = logicGateEnum.objectConditionOption;
+        logicGate.conditionOption = logicGateEnum.conditionOption;
+        logicGate.actionOption = logicGateEnum.actionOption;
+        logicGate.objectActionOption = logicGateEnum.objectActionOption;
+
         return logicGate;
     }
 }

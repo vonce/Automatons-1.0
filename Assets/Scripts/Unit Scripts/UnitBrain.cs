@@ -8,8 +8,8 @@ public class UnitBrain : MonoBehaviour
     private float nextCheck;
     [SerializeField]
     private float checkRate;
-    private List<GameObject> list = new List<GameObject>();
     private GameObject objCheck;
+    private int activeActionOption;
     public Vector3 moveDirection;
 
     public void MoveToTarget()
@@ -43,14 +43,15 @@ public class UnitBrain : MonoBehaviour
         status.logicMatrix[1] = status.EnumToLogicGate(status.logicMatrixEnum[1]);
         status.logicMatrix[2] = status.EnumToLogicGate(status.logicMatrixEnum[2]);
         status.logicMatrix[3] = status.EnumToLogicGate(status.logicMatrixEnum[3]);
-        status.logicMatrix[4] = status.EnumToLogicGate(status.logicMatrixEnum[4]);
+
+        Debug.Log(status.logicMatrix[0].objectCondition);
+        Debug.Log(status.logicMatrixEnum[0].objectCondition);
     }
 
     private void Update()
     {
         if (status.logicMatrix != null && nextCheck <= Time.time && status.active == true)
         {
-            status.logicMatrix[0] = status.EnumToLogicGate(status.logicMatrixEnum[0]);
             CheckLogicMatrix();
             nextCheck = checkRate + Time.time;
         }
@@ -60,48 +61,35 @@ public class UnitBrain : MonoBehaviour
     {
         if (status.action != null && status.active == true)
         {
-            status.action.Action(status.target);
+            status.action.Action(status.target, activeActionOption);
         }
     }
 
-    public void CheckLogicMatrix()
+    public void CheckLogicMatrix()//iterates through all logic matrices 
     {
-        foreach (LogicGate i in status.logicMatrix)
+        int j = 0;
+        foreach (LogicGate logicGate in status.logicMatrix)
         {
-            if (CheckCondition(i.objectCondition, i.condition) == true)
+            if (CheckCondition(logicGate.objectCondition, logicGate.objectConditionOption, logicGate.condition, logicGate.conditionOption) == true)
             {
-                if (CheckAction(i.objectAction, i.action) == true)
+                if (CheckAction(logicGate.objectAction, logicGate.objectActionOption, logicGate.action, logicGate.actionOption) == true)
                 {
-                    status.action = i.action;
+                    status.action = logicGate.action;
+                    status.target = logicGate.objectAction.Object(status.inSightRange, logicGate.objectActionOption);
+                    activeActionOption = logicGate.actionOption;
                     break;
                 }
             }
+            j++;
         }
     }
 
     //Checks the OBJECTCONDITION against CONDITION, returns bool
-    private bool CheckCondition(IObject[] objectCondition, ICondition condition)
+    private bool CheckCondition(IObject objectCondition, int objectConditionOption, ICondition condition, int conditionOption)
     {
         if (objectCondition != null && condition != null)
         {
-            list = new List<GameObject>(status.inSightRange);
-            for (int i = 0; i < objectCondition.Length; i++)
-            {
-                objectCondition[i].filterList(list);
-            }
-            if (list.Count > 0)
-            {
-                objCheck = list[0];
-                foreach (GameObject obj in list)
-                {
-                    if (objCheck != null && obj != null && Vector3.Distance(gameObject.transform.position, obj.transform.position) < Vector3.Distance(gameObject.transform.position, objCheck.transform.position))
-                    {
-                        objCheck = obj;
-                    }
-                }
-                return condition.Condition(objCheck);
-            }
-            return false;
+            return condition.Condition(objectCondition.Object(status.inSightRange, objectConditionOption), conditionOption);
         }
         else
         {
@@ -110,36 +98,12 @@ public class UnitBrain : MonoBehaviour
     }
 
     //Checks the OBJECTACTION against ACTION, returns bool
-    private bool CheckAction(IObject[] objectAction, IAction action)
+    private bool CheckAction(IObject objectAction, int objectActionOption, IAction action, int actionOption)
     {
         if (objectAction != null && action != null)
         {
-            list = new List<GameObject>(status.inSightRange);
-            for (int i = 0; i < objectAction.Length; i++)
-            {
-                objectAction[i].filterList(list);
-            }
-            if (list.Count > 0)
-            {
-                objCheck = list[0];
-                foreach (GameObject obj in list)
-                {
-                    if (objCheck != null && obj != null && Vector3.Distance(gameObject.transform.position, obj.transform.position) < Vector3.Distance(gameObject.transform.position, objCheck.transform.position))
-                    {
-                        objCheck = obj;
-                    }
-                }
-                if (action.ActionCheck(objCheck) == true)
-                {
-                    status.target = objCheck;
-                    return action.ActionCheck(status.target);
-                }
-                return false;
-            }
-            else
-            {
-                return false;
-            }
+            return action.ActionCheck(objectAction.Object(status.inSightRange, objectActionOption), actionOption);
+
         }
         else
         {

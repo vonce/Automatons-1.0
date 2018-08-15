@@ -10,14 +10,17 @@ public class InSightRange : MonoBehaviour
     void Start()
     {
         status = GetComponentInParent<Status>();
-        //status.inSightRange.Add(status.enemyBase);
     }
 
     void Update()
     {
+        if (status.inSightRange.Contains(gameObject))
+        {
+            status.inSightRange.Remove(gameObject);
+        }
         if (sightRange != status.sightRange)
         {
-            transform.localScale = new Vector2(status.sightRange, status.sightRange);
+            transform.localScale = new Vector3(status.sightRange, status.sightRange);
             sightRange = (status.sightRange);
         }
     }
@@ -39,6 +42,6 @@ public class InSightRange : MonoBehaviour
 
     void SightUpdate()
     {
-        status.inSightRange.RemoveAll(GameObject => GameObject == null);
+        status.inSightRange.RemoveWhere(GameObject => GameObject == null);
     }
 }

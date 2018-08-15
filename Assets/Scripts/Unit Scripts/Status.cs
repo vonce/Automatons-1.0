@@ -9,14 +9,14 @@ public class Status : StatusHandler
     public bool buildable = false;//used for knowing buildable areas
     public bool colliding = false;//" "
     public bool selected = false;
-    public LogicGateEnum[] logicMatrixEnum = new LogicGateEnum[6];
-    public LogicGate[] logicMatrix = new LogicGate[6];
+    public LogicGateEnum[] logicMatrixEnum = new LogicGateEnum[4];
+    public LogicGate[] logicMatrix = new LogicGate[4];
     public IAction action; //action gameObject is taking
     public GameObject target; //target of gameObject
     public GameObject enemyBase;//enemyBase
-    public List<GameObject> inSightRange = new List<GameObject>();//list of objects in sight range
-    public List<GameObject> filteredInSightRange = new List<GameObject>();//list of objects that satisfy object filters
-    //private List<GameObject> inAttackRange = new List<GameObject>();//list of objects in attack range
+    public GameObject allyBase;//enemyBase
+    public HashSet<GameObject> inSightRange = new HashSet<GameObject>();//list of objects in sight range
+    public int buildingCost;//building cost
     public UnitTypeE unitType;//unit type
     public PrimaryTypeE primaryType;//primary weapon type
     public SecondaryTypeE secondaryType;//secondary weapon type
@@ -36,11 +36,11 @@ public class Status : StatusHandler
         {
             if (unitType != UnitTypeE.Base && obj.GetComponent<Status>() != null && obj.GetComponent<Status>().unitType == UnitTypeE.Base)
             {
-                //Debug.Log(obj);
                 enemyBase = obj.GetComponent<Status>().enemyBase;
+                allyBase = obj;
             }
         }
-
+        
         Component[] meshes = GetComponentsInChildren<MeshRenderer>();
         foreach (MeshRenderer mesh in meshes)
         {

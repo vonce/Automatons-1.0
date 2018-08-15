@@ -68,11 +68,11 @@ public class PlayerBuild : MonoBehaviour {
         if (Input.GetMouseButtonDown(0) && isBuilding == true)
         {
             RaycastHit raycasthit = new RaycastHit();
-            if (Physics.Raycast(playerCamera.ScreenPointToRay(Input.mousePosition), out raycasthit, Mathf.Infinity, moonLayermask) == true)
+            if (Physics.Raycast(playerCamera.ScreenPointToRay(Input.mousePosition), out raycasthit, Mathf.Infinity, moonLayermask) == true && (int)building.GetComponent<Status>().buildingCost <= player.metal)
             {
                 buildingPreview = Instantiate(building, raycasthit.point, Quaternion.identity);
                 buildingPreview.tag = gameObject.tag;
-                buildingPreview.GetComponent<Status>().logicMatrixEnum = GetComponent<PlayerLogicHandler>().logicMatrixEnum;
+                buildingPreview.GetComponent<Status>().logicMatrixEnum = GetComponent<PlayerLogicHandler>().defaultLogicMatrixEnum;
                 foreach (MonoBehaviour script in buildingPreview.GetComponents<MonoBehaviour>())
                 {
                     if (script != buildingPreview.GetComponent<Status>())
@@ -122,6 +122,7 @@ public class PlayerBuild : MonoBehaviour {
                     buildableArea = obj.transform.Find("Buildable").gameObject;
                     buildableArea.SetActive(false);
                 }
+                player.metalChange(-building.GetComponent<Status>().buildingCost);
             }
             else
             {
