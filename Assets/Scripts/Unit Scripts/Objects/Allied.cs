@@ -34,7 +34,7 @@ public class Allied : MonoBehaviour, IObject
             {
                 if (obj != null)
                 {
-                    Vector3 difference = obj.transform.position = transform.position;
+                    Vector3 difference = obj.transform.position - transform.position;
                     float currentDistance = difference.magnitude;
                     if (currentDistance > distance)
                     {
@@ -106,16 +106,12 @@ public class Allied : MonoBehaviour, IObject
         }
         GameObject closest = new GameObject();
         
-        if (GetComponent<Status>().target != null)
-        {
-            Debug.Log(GetComponent<Status>().target.transform.position + "allied script 1");
-        }
         float dist = Mathf.Infinity;
         foreach (GameObject obj in alliedSet)
         {
             if (obj != null)
             {
-                Vector3 difference = obj.transform.position = transform.position;
+                Vector3 difference = obj.transform.position - transform.position;
                 float currentDistance = difference.magnitude;
                 if (currentDistance < dist)
                 {
@@ -123,10 +119,6 @@ public class Allied : MonoBehaviour, IObject
                     closest = obj;
                 }
             }
-        }
-        if (GetComponent<Status>().target != null)
-        {
-            Debug.Log(GetComponent<Status>().target.transform.position + "allied script 2");
         }
         return closest;
     }

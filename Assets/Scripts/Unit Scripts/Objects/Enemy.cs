@@ -34,7 +34,7 @@ public class Enemy : MonoBehaviour, IObject
             {
                 if (obj != null)
                 {
-                    Vector3 difference = obj.transform.position = transform.position;
+                    Vector3 difference = obj.transform.position - transform.position;
                     float currentDistance = difference.magnitude;
                     if (currentDistance > distance)
                     {
@@ -110,7 +110,7 @@ public class Enemy : MonoBehaviour, IObject
         {
             if (obj != null)
             {
-                Vector3 difference = obj.transform.position = transform.position;
+                Vector3 difference = obj.transform.position - transform.position;
                 float currentDistance = difference.magnitude;
                 if (currentDistance < dist)
                 {

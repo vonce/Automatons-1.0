@@ -8,17 +8,35 @@ public class TeamColor : MonoBehaviour {
 
     void Start()
     {
-        if (gameObject.tag == "Blue")
+        if (transform.transform.parent != null)
         {
-            col = Color.blue;
+            if (transform.parent.tag == "Blue")
+            {
+                col = Color.blue;
+            }
+            if (transform.parent.tag == "Red")
+            {
+                col = Color.red;
+            }
+            if (transform.parent.tag == "Green")
+            {
+                col = Color.green;
+            }
         }
-        if (gameObject.tag == "Red")
+        else
         {
-            col = Color.red;
-        }
-        if (gameObject.tag == "Green")
-        {
-            col = Color.green;
+            if (gameObject.tag == "Blue")
+            {
+                col = Color.blue;
+            }
+            if (gameObject.tag == "Red")
+            {
+                col = Color.red;
+            }
+            if (gameObject.tag == "Green")
+            {
+                col = Color.green;
+            }
         }
         gameObject.GetComponent<MeshRenderer>().material.color = col;
     }

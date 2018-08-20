@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class Primary : MonoBehaviour, IAction
 {
+    private Status status;
+    private UnitBrain unitBrain;
+
+    private Vector3 targetVector;//weapon to target
+    public float targetDistance;
+
     [SerializeField]
     private Rigidbody bulletPrefab;
     [SerializeField]
@@ -27,11 +33,6 @@ public class Primary : MonoBehaviour, IAction
     [SerializeField]
     private GameObject weapon;
 
-    private Status status;
-    private UnitBrain unitBrain;
-    private Vector3 targetVector;//weapon to target
-    public float targetDistance;
-
     public ActionE enumID()
     {
         return ActionE.Primary;
@@ -46,6 +47,7 @@ public class Primary : MonoBehaviour, IAction
     {
         if (target != null)
         {
+            status.primaryType = (PrimaryTypeE)option;
             return true;
         }
         else
@@ -73,7 +75,7 @@ public class Primary : MonoBehaviour, IAction
                 bullet = Instantiate(bulletPrefab, weapon.transform.position, Quaternion.LookRotation(targetVector));
                 bullet.tag = gameObject.tag;
                 bullet.GetComponent<Bullet>().attackPower = status.attackPower;
-                bullet.AddForce(-targetVector.normalized * 1000, ForceMode.Force);
+                bullet.AddForce(-targetVector.normalized * 2500, ForceMode.Force);
 
                 nextGunFire = gunFireRate + Time.time;
             }

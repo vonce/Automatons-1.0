@@ -25,7 +25,6 @@ public class EventSystemScript : MonoBehaviour {
         playerScripts[1] = player2.GetComponent<Player>();
         players[0] = player1;
         players[1] = player2;
-
     }
 
     void nextDay()

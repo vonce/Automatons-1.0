@@ -8,13 +8,13 @@ public class MoonPhysics : MonoBehaviour
 
     private void Awake()
     {
-        moon = GameObject.Find("Moon").GetComponent<Moon>();
+        moon = GameObject.Find("Moon").GetComponent<Moon>();//finds in game moon
     }
     void FixedUpdate ()
     {
         if (moon)
         {
-            moon.gravity(gameObject.transform);
+            moon.gravity(gameObject.transform);//gravity force on game object
         }
     }
 }

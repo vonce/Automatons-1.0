@@ -12,14 +12,10 @@ public class StatusHandler : MonoBehaviour
     public float attackRange;
     public int attackPower;
     public int defense;
-    [SerializeField]
-    private int maxHealth;
-    [SerializeField]
-    private int maxSpecial;
-    [SerializeField]
-    private int currentHealth;
-    [SerializeField]
-    private int currentSpecial;
+    public int maxHealth;
+    public int maxSpecial;
+    public int currentHealth;
+    public int currentSpecial;
     [SerializeField]
     private GameObject healthBar;
     [SerializeField]
@@ -36,9 +32,13 @@ public class StatusHandler : MonoBehaviour
 
     public void HealthChange(int amount)//method used for all health changes
     {
-        if (amount - defense > 0)
+        /*if (amount - defense > 0)
         {
             currentHealth = currentHealth + (amount - defense);
+        }*/
+        if (amount + currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
         }
         else
         {
@@ -53,7 +53,14 @@ public class StatusHandler : MonoBehaviour
 
     public void SpecialChange(int amount)//method used for all special changes
     {
-        currentSpecial = currentSpecial + amount;
+        if (amount + currentSpecial > maxSpecial)
+        {
+            currentSpecial = maxSpecial;
+        }
+        else
+        {
+            currentSpecial = currentSpecial + amount;
+        }
         SetSpecialBar((float) currentSpecial / maxSpecial);
     }
 

@@ -78,15 +78,7 @@ public class Beam : MonoBehaviour
         }
     }
 
-    void OnTriggerStay(Collider other)//trigger events
-    {
-        if (inBeam.Contains(other) == false && other.gameObject.GetComponentInParent<Status>() != null)
-        {
-            inBeam.Add(other);
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
+    void OnTriggerExit(Collider other)
     {
         if (inBeam.Contains(other) == true)
         {

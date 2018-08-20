@@ -6,8 +6,8 @@ using UnityEngine;
 
 public class Status : StatusHandler
 {
-    public bool buildable = false;//used for knowing buildable areas
-    public bool colliding = false;//" "
+    public int buildable;//used for knowing buildable areas
+    public int colliding;//" "
     public bool selected = false;
     public LogicGateEnum[] logicMatrixEnum = new LogicGateEnum[4];
     public LogicGate[] logicMatrix = new LogicGate[4];
@@ -29,7 +29,7 @@ public class Status : StatusHandler
     [SerializeField]
     private Material green;
 
-    void Start()
+    void Awake()
     {
         GameObject[] gameObjArr = GameObject.FindGameObjectsWithTag(gameObject.tag);
         foreach (GameObject obj in gameObjArr)
@@ -40,8 +40,10 @@ public class Status : StatusHandler
                 allyBase = obj;
             }
         }
-        
-        Component[] meshes = GetComponentsInChildren<MeshRenderer>();
+    }
+    private void Start()
+    {
+    Component[] meshes = GetComponentsInChildren<MeshRenderer>();
         foreach (MeshRenderer mesh in meshes)
         {
             if (gameObject.tag == "Blue")

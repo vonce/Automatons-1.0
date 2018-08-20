@@ -6,22 +6,27 @@ public class ColliderBuildable : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        gameObject.GetComponentInParent<Status>().colliding = false;
-    }
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.gameObject.name == "Collider")
+        if (other.gameObject.GetComponent<TriggerBuildable>() != null)
         {
-            gameObject.GetComponentInParent<Status>().buildable = false;
-            gameObject.GetComponentInParent<Status>().colliding = true;
+            gameObject.GetComponentInParent<Status>().buildable += 1;
+        }
+        else if (other.gameObject.GetComponent<ColliderBuildable>() != null)
+        {
+            gameObject.GetComponentInParent<Status>().colliding += 1;
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.GetComponent<Status>() != null)
+        if (other.gameObject != null)
         {
-            gameObject.GetComponentInParent<Status>().buildable = true;
-            gameObject.GetComponentInParent<Status>().colliding = false;
+            if (other.gameObject.GetComponent<TriggerBuildable>() != null)
+            {
+                gameObject.GetComponentInParent<Status>().buildable -= 1;
+            }
+            else if (other.gameObject.GetComponent<ColliderBuildable>() != null)
+            {
+                gameObject.GetComponentInParent<Status>().colliding -= 1;
+            }
         }
     }
 }

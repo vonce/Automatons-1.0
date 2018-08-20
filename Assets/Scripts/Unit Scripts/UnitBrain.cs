@@ -5,20 +5,20 @@ using UnityEngine;
 public class UnitBrain : MonoBehaviour
 {
     private Status status;
-    private float nextCheck;
-    [SerializeField]
-    private float checkRate;
+    //private float nextCheck;
+    //[SerializeField]
+    //private float checkRate;
     private GameObject objCheck;
     private int activeActionOption;
-    public Vector3 moveDirection;
+    public Vector3 targetDirection;
 
     public void MoveToTarget()
     {
         if (status.target != null)
         {
-            moveDirection = Vector3.ProjectOnPlane(transform.position - status.target.transform.position, transform.up);
-            transform.rotation = Quaternion.LookRotation(-moveDirection, transform.up);
-            transform.position = Vector3.MoveTowards(transform.position, transform.position - moveDirection, status.speed * Time.deltaTime);
+            targetDirection = Vector3.ProjectOnPlane(transform.position - status.target.transform.position, transform.up);
+            transform.rotation = Quaternion.LookRotation(Vector3.RotateTowards(transform.forward , -targetDirection.normalized, .1f, .1f), transform.up);
+            transform.position = Vector3.MoveTowards(transform.position, transform.position + transform.forward, status.speed * Time.deltaTime);
         }
     }
 
@@ -26,15 +26,16 @@ public class UnitBrain : MonoBehaviour
     {
         if (status.target != null)
         {
-            moveDirection = Vector3.ProjectOnPlane(transform.position - status.target.transform.position, transform.up);
-            transform.rotation = Quaternion.LookRotation(-moveDirection, transform.up);
+            targetDirection = Vector3.ProjectOnPlane(transform.position - status.target.transform.position, transform.up);
+            transform.rotation = Quaternion.LookRotation(Vector3.RotateTowards(transform.forward, -targetDirection.normalized, .1f, .1f), transform.up);
         }
     }
     
     private void Awake()
     {
+        GameObject.Find("LogicCheck").GetComponent<LogicCheck>().automatons.Add(gameObject);
         status = GetComponent<Status>();
-        nextCheck = checkRate + Time.time;
+        //nextCheck = checkRate + Time.time;
     }
 
     private void Start()
@@ -45,18 +46,14 @@ public class UnitBrain : MonoBehaviour
         status.logicMatrix[3] = status.EnumToLogicGate(status.logicMatrixEnum[3]);
     }
 
-    private void Update()
+    /*private void Update()
     {
         if (status.logicMatrix != null && nextCheck <= Time.time && status.active == true)
         {
-            CheckLogicMatrix();
-            nextCheck = checkRate + Time.time;
-            if (status.target != null)
-            {
-                Debug.Log(status.target.transform.position + "++++++++CHECK");
-            }
+            //CheckLogicMatrix();
+            //nextCheck = checkRate + Time.time;
         }
-    }
+    }*/
 
     private void FixedUpdate()
     {
@@ -74,10 +71,6 @@ public class UnitBrain : MonoBehaviour
             {
                 if (CheckAction(logicGate.objectAction, logicGate.objectActionOption, logicGate.action, logicGate.actionOption) == true)
                 {
-                    if (status.target != null)
-                    {
-                        Debug.Log(status.target.transform.position + "++++++++CHECK");
-                    }
                     status.action = logicGate.action;
                     status.target = logicGate.objectAction.Object(status.inSightRange, logicGate.objectActionOption);
                     break;
@@ -104,18 +97,10 @@ public class UnitBrain : MonoBehaviour
     {
         if (objectAction != null && action != null)
         {
-            if (status.target != null)
-            {
-                Debug.Log(status.target.transform.position + "CHECK ACTION TRUE");
-            }
             return action.ActionCheck(objectAction.Object(status.inSightRange, objectActionOption), actionOption);
         }
         else
         {
-            if (status.target != null)
-            {
-                Debug.Log(status.target.transform.position + "CHECK ACTION FALSE");
-            }
             return false;
         }
     }

@@ -222,19 +222,20 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4603234251615846}
-  - component: {fileID: 54456127680814306}
+  - component: {fileID: 54748898015889888}
   - component: {fileID: 114170793993879934}
   - component: {fileID: 114832164697960922}
   - component: {fileID: 114699862930398474}
   - component: {fileID: 114731019452166002}
   - component: {fileID: 114012420242738916}
   - component: {fileID: 114137622204632164}
+  - component: {fileID: 114998570743611634}
   - component: {fileID: 114728994316023748}
   - component: {fileID: 114353576807870348}
-  - component: {fileID: 114998570743611634}
   - component: {fileID: 114438155215628974}
   - component: {fileID: 114304697204694158}
   - component: {fileID: 114080337565257938}
+  - component: {fileID: 114420037638089226}
   m_Layer: 9
   m_Name: Automaton
   m_TagString: Green
@@ -1709,14 +1710,14 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1710610071008702}
   m_Mesh: {fileID: 4300024, guid: 61235c7665fc4e84b8bb5455401ced70, type: 3}
---- !u!54 &54456127680814306
+--- !u!54 &54748898015889888
 Rigidbody:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1388749449566870}
   serializedVersion: 2
-  m_Mass: 5
+  m_Mass: 1
   m_Drag: 1
   m_AngularDrag: 0.05
   m_UseGravity: 0
@@ -1749,6 +1750,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0ba526395b283f4e9f152c39174b6ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetDistance: 0
   bulletPrefab: {fileID: 54746919351140734, guid: 37275c128c1199443b90adfea36cba87,
     type: 2}
   beamPrefab: {fileID: 54687565902668284, guid: 16e99713db274b74fb6b5c899d59dafc,
@@ -1756,10 +1758,9 @@ MonoBehaviour:
   grenadePrefab: {fileID: 54200032447212526, guid: a7357a19003d0f942bbac7019ee755e6,
     type: 2}
   gunFireRate: 1
-  beamTickRate: 1
+  beamTickRate: 0.5
   grenadeFireRate: 2
   weapon: {fileID: 1500536961805572}
-  targetDistance: 0
 --- !u!114 &114080337565257938
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1793,6 +1794,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78e0578b15934cd4da1b7dc018b57a52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rocketPrefab: {fileID: 54031239233196814, guid: 3a73d453e1a020843b556e9cfcf7f245,
+    type: 2}
+  secondaryFireRate: 10
 --- !u!114 &114170793993879934
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1894,6 +1898,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1275a7f3ad7b4fc4ab481545beca0a98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114420037638089226
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1388749449566870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3aa31bb30d38654bbce1583a75e3c84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114438155215628974
@@ -2103,8 +2118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75fad4cea3665cd4f8cfc86e3e7d10e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkRate: 5
-  moveDirection: {x: 0, y: 0, z: 0}
+  targetDirection: {x: 0, y: 0, z: 0}
 --- !u!114 &114998570743611634
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2116,6 +2130,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4a685bcb703dfd42ab4d2c0dd2ad7e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lightningPrefab: {fileID: 1257240083285214, guid: a693930cef3626b41b2d0b141fe033f3,
+    type: 2}
+  specialFireRate: 10
 --- !u!135 &135223943855144494
 SphereCollider:
   m_ObjectHideFlags: 1

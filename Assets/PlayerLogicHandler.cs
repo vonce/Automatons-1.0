@@ -10,6 +10,10 @@ public class PlayerLogicHandler : MonoBehaviour {
     private LogicGateEnum[] copiedLogicMatrixEnum = new LogicGateEnum[4];
     private Dictionary<System.Enum, System.Enum> enumDictionary = new Dictionary<System.Enum, System.Enum>();
 
+    private PrimaryTypeE primary;
+    private SecondaryTypeE secondary;
+    private SpecialTypeE special;
+    
     [SerializeField]
     private CanvasRenderer copyButton;
     [SerializeField]
@@ -97,6 +101,8 @@ public class PlayerLogicHandler : MonoBehaviour {
         enumDictionary.Add(ConditionE.Always, NoneE.None);
         enumDictionary.Add(ConditionE.LessThanHealth, PercentE.ZeroPct);
         enumDictionary.Add(ConditionE.MoreThanHealth, PercentE.ZeroPct);
+        enumDictionary.Add(ConditionE.LessThanSpecial, PercentE.ZeroPct);
+        enumDictionary.Add(ConditionE.MoreThanSpecial, PercentE.ZeroPct);
 
         enumDictionary.Add(ActionE.Move, NoneE.None);
         enumDictionary.Add(ActionE.Primary, PrimaryTypeE.Gun);
@@ -233,9 +239,9 @@ public class PlayerLogicHandler : MonoBehaviour {
 
     public void Apply ()
     {
-        logicMatrixEnum[0] = LogicGateEnumChange((ObjectE)objectConditionDropdown0.value, objectConditionOptionDropdown0.value, (ConditionE)conditionDropdown0.value, conditionOptionDropdown0.value, (ActionE)actionDropdown0.value, actionDropdown0.value, (ObjectE)objectActionDropdown0.value, objectActionOptionDropdown0.value);
-        logicMatrixEnum[1] = LogicGateEnumChange((ObjectE)objectConditionDropdown1.value, objectConditionOptionDropdown1.value, (ConditionE)conditionDropdown1.value, conditionOptionDropdown1.value, (ActionE)actionDropdown1.value, actionDropdown1.value, (ObjectE)objectActionDropdown1.value, objectActionOptionDropdown1.value);
-        logicMatrixEnum[2] = LogicGateEnumChange((ObjectE)objectConditionDropdown2.value, objectConditionOptionDropdown2.value, (ConditionE)conditionDropdown2.value, conditionOptionDropdown2.value, (ActionE)actionDropdown2.value, actionDropdown2.value, (ObjectE)objectActionDropdown2.value, objectActionOptionDropdown2.value);
+        logicMatrixEnum[0] = LogicGateEnumChange((ObjectE)objectConditionDropdown0.value, objectConditionOptionDropdown0.value, (ConditionE)conditionDropdown0.value, conditionOptionDropdown0.value, (ActionE)actionDropdown0.value, actionOptionDropdown0.value, (ObjectE)objectActionDropdown0.value, objectActionOptionDropdown0.value);
+        logicMatrixEnum[1] = LogicGateEnumChange((ObjectE)objectConditionDropdown1.value, objectConditionOptionDropdown1.value, (ConditionE)conditionDropdown1.value, conditionOptionDropdown1.value, (ActionE)actionDropdown1.value, actionOptionDropdown1.value, (ObjectE)objectActionDropdown1.value, objectActionOptionDropdown1.value);
+        logicMatrixEnum[2] = LogicGateEnumChange((ObjectE)objectConditionDropdown2.value, objectConditionOptionDropdown2.value, (ConditionE)conditionDropdown2.value, conditionOptionDropdown2.value, (ActionE)actionDropdown2.value, actionOptionDropdown2.value, (ObjectE)objectActionDropdown2.value, objectActionOptionDropdown2.value);
         
         if (playerSelect.selected.Count > 0)
         {
@@ -277,7 +283,7 @@ public class PlayerLogicHandler : MonoBehaviour {
         objectConditionOptionDropdown2.value = (int)matrix[2].objectConditionOption;
         conditionDropdown2.value = (int)matrix[2].condition;
         conditionOptionDropdown2.value = (int)matrix[2].conditionOption;
-        actionDropdown2.value = (int)matrix[0].action;
+        actionDropdown2.value = (int)matrix[2].action;
         actionOptionDropdown2.value = (int)matrix[2].actionOption;
         objectActionDropdown2.value = (int)matrix[2].objectAction;
         objectActionOptionDropdown2.value = (int)matrix[2].objectActionOption;

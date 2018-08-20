@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     private float metalRate;
     private float nextMetal;
     public int metal;
-    public GameObject myBase;
+    public GameObject allyBase;
     public GameObject enemyBase;
     public bool done;
     public HashSet<GameObject> ownedObjects = new HashSet<GameObject>();
@@ -73,7 +73,7 @@ public class Player : MonoBehaviour
         done = false;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (nextMetal <= Time.time)
         {

@@ -55,10 +55,9 @@ public class PlayerBuild : MonoBehaviour {
         isBuilding = true;
         foreach (GameObject obj in player.ownedObjects)
         {
-            if (obj != null && obj.transform.Find("Buildable").gameObject != null)
+            if (obj != null && obj.transform.GetChild(3).GetComponent<TriggerBuildable>() == true)
             {
-                buildableArea = obj.transform.Find("Buildable").gameObject;
-                buildableArea.SetActive(true);
+                obj.transform.GetChild(3).gameObject.SetActive(true);
             }
         }
     }
@@ -68,10 +67,17 @@ public class PlayerBuild : MonoBehaviour {
         if (Input.GetMouseButtonDown(0) && isBuilding == true)
         {
             RaycastHit raycasthit = new RaycastHit();
-            if (Physics.Raycast(playerCamera.ScreenPointToRay(Input.mousePosition), out raycasthit, Mathf.Infinity, moonLayermask) == true && (int)building.GetComponent<Status>().buildingCost <= player.metal)
+            if (Physics.Raycast(playerCamera.ScreenPointToRay(Input.mousePosition), out raycasthit, Mathf.Infinity, moonLayermask) == true 
+                && (int)building.GetComponent<Status>().buildingCost <= player.metal)
             {
-                buildingPreview = Instantiate(building, raycasthit.point, Quaternion.identity);
+                buildingPreview = Instantiate(building, raycasthit.point, Quaternion.LookRotation(-Vector3.ProjectOnPlane(player.enemyBase.transform.position + raycasthit.point, raycasthit.point), raycasthit.point));
+                buildingPreview.GetComponent<Status>().buildable = 0;
+                buildingPreview.GetComponent<Status>().enemyBase = player.enemyBase;
+                buildingPreview.GetComponent<Status>().allyBase = player.allyBase;
                 buildingPreview.tag = gameObject.tag;
+                buildingPreview.GetComponentInChildren<MeshRenderer>().material.color = Color.red;
+                buildingPreview.transform.Find("Collider").GetComponent<Collider>().isTrigger = true;
+                //buildingPreview.transform.rotation = Quaternion.LookRotation(-Vector3.ProjectOnPlane(player.myBase.transform.position - buildingPreview.transform.position, buildingPreview.transform.position), buildingPreview.transform.position);
                 buildingPreview.GetComponent<Status>().logicMatrixEnum = GetComponent<PlayerLogicHandler>().defaultLogicMatrixEnum;
                 foreach (MonoBehaviour script in buildingPreview.GetComponents<MonoBehaviour>())
                 {
@@ -80,9 +86,6 @@ public class PlayerBuild : MonoBehaviour {
                         script.enabled = false;
                     }
                 }
-                buildingPreview.GetComponentInChildren<MeshRenderer>().material.color = Color.red;
-                buildingPreview.transform.Find("Collider").GetComponent<Collider>().isTrigger = true;
-                buildingPreview.transform.rotation = Quaternion.LookRotation(-Vector3.ProjectOnPlane(player.myBase.transform.position - buildingPreview.transform.position, buildingPreview.transform.position), buildingPreview.transform.position);
             }
         }
 
@@ -92,9 +95,9 @@ public class PlayerBuild : MonoBehaviour {
             if (Physics.Raycast(playerCamera.ScreenPointToRay(Input.mousePosition), out raycasthit, Mathf.Infinity, moonLayermask) == true && buildingPreview != null)
             {
                 buildingPreview.transform.position = raycasthit.point;
-                buildingPreview.transform.rotation = Quaternion.LookRotation(-Vector3.ProjectOnPlane(player.myBase.transform.position - buildingPreview.transform.position, buildingPreview.transform.position), buildingPreview.transform.position);
+                buildingPreview.transform.rotation = Quaternion.LookRotation(-Vector3.ProjectOnPlane(player.enemyBase.transform.position + buildingPreview.transform.position, buildingPreview.transform.position), buildingPreview.transform.position);
             }
-            if (buildingPreview != null && buildingPreview.GetComponent<Status>().buildable == true)
+            if (buildingPreview != null && buildingPreview.GetComponent<Status>().buildable > 0 && buildingPreview.GetComponent<Status>().colliding == 0)
             {
                 buildingPreview.GetComponentInChildren<MeshRenderer>().material.color = Color.green;
             }
@@ -106,7 +109,7 @@ public class PlayerBuild : MonoBehaviour {
 
         if (Input.GetMouseButtonUp(0))
         {
-            if (buildingPreview != null && buildingPreview.GetComponent<Status>().buildable == true)
+            if (buildingPreview != null && buildingPreview.GetComponent<Status>().buildable > 0 && buildingPreview.GetComponent<Status>().colliding == 0)
             {
                 buildingPreview.GetComponentInChildren<MeshRenderer>().material.color = Color.white;
                 buildingPreview.transform.Find("Collider").GetComponent<Collider>().isTrigger = false;
@@ -119,21 +122,25 @@ public class PlayerBuild : MonoBehaviour {
                 isBuilding = false;
                 foreach (GameObject obj in player.ownedObjects)
                 {
-                    buildableArea = obj.transform.Find("Buildable").gameObject;
-                    buildableArea.SetActive(false);
+                    if (obj.GetComponentInChildren<TriggerBuildable>() != null)
+                    {
+                        obj.GetComponentInChildren<TriggerBuildable>().gameObject.SetActive(false);
+                    }
                 }
                 player.metalChange(-building.GetComponent<Status>().buildingCost);
             }
             else
             {
-                if (buildingPreview != null && buildingPreview.GetComponent<Status>().buildable == false)
+                if (buildingPreview != null)
                 {
                     Destroy(buildingPreview);
                     isBuilding = false;
                     foreach (GameObject obj in player.ownedObjects)
                     {
-                        buildableArea = obj.transform.Find("Buildable").gameObject;
-                        buildableArea.SetActive(false);
+                        if (obj.GetComponentInChildren<TriggerBuildable>() != null)
+                        {
+                            obj.GetComponentInChildren<TriggerBuildable>().gameObject.SetActive(false);
+                        }
                     }
                 }
             }
