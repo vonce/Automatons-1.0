@@ -1,4 +1,4 @@
-# Automatons-1.0
+# Automatons
 
 I had always loved RTS games like Starcraft and Age of Empires, and really wanted to satisfy that itch with a mobile game. However, the way people play mobile games, the “real time” aspect of RTS wasn’t really feasible. When someone usually plays a mobile game, they want to play on their own time on the bus, train or toilet. I decided to make an strategy game with two players competing, but asynchronously. In this game you can build buildings, just like any RTS, but you cannot directly control units to attack. During a player’s turn they can only build buildings and adjust the logic of the units coming out of the building ( more on that later). The first player to destroy the enemy command center wins.
 
