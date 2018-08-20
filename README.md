@@ -14,7 +14,7 @@ The game is played on a moon and both players start at either pole. Every unit h
 ![](https://i.imgur.com/qtiaB8I.png)
 Blue team destroying Red team’s base
 
-###Unit Logic
+### Unit Logic
 
 A unit "brain" is pretty simple. For each gate, the condition is checked against the object condition, and if true, the action is checked against the object action. If that is true, then the unit's target is set to the object action, and the unit's action is set to the action in the gate. if any of the checks resolve as false, we move on to the next gate.
 
@@ -77,7 +77,7 @@ Check logic matrix method.
 
 This method is called once per second per unit, staggered, so it isn't called at the exact same time for potentially hundreds of units. When adding a new object condition or action, it must implement the respective interface, added to the list of enums, and assigned the proper enumID so it can be chosen from the dropdown lists.
 
-###Physics
+### Physics
 
 The game is played on a spherical coordinate system, but it suprisingly does not need much converting to and from cartesian coordinates. The only entity that is in a spherical coordinate system is the player camera. Adjusting the camera moves the camera in radians on the phi and theta axes which are then converted to cartesian coordinates for Unity. Zooming in and out is as simple as changing the radius in the spherical coordinate system.
 
