@@ -7,12 +7,12 @@ The main mechanic of this game is adjusting the logic of the units. Each unit ha
 For example, if a unit had a logic matrix of: (self)(less than 30% health)>(move)(ally command) (self)(always)>(attack)(nearest enemy) This unit would attack the nearest enemy at higher than 30% health, but once it drops below 30%, it would move back to its ally command where it can heal up and go back to battle at over 30% health.
 
 ![](https://i.imgur.com/Sh4lC8O.png)
-Example logic gate. Two rows per logic gate, for a total of 3 logic gates per unit.
+###### Example logic gate. Two rows per logic gate, for a total of 3 logic gates per unit.
 
 The game is played on a moon and both players start at either pole. Every unit has a 4th uneditable logic gate that automatically makes it attack the enemy base, so even if all logic gates resolve as false, the unit will automatically head towards the enemy base. The goal is to make smart units that work together to push the enemy back through superior logic (or sheer numbers).
 
 ![](https://i.imgur.com/qtiaB8I.png)
-Blue team destroying Red team’s base
+###### Blue team destroying Red team’s base
 
 ### Unit Logic
 
@@ -62,6 +62,7 @@ public struct LogicGate
 }
 ```
 ###### Logic Gate Structure
+
 
 
 ```C#
