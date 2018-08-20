@@ -39,7 +39,7 @@ public interface IAction
     void Action(GameObject target, int option);
 }
 ```
-Interface for Object, Condition, and Action.
+###### Interface for Object, Condition, and Action.
 
 In order to call and use different scripts based on what is in the logic gate, our scripts need to implement an interface where they must have specific methods that take the same arguments and return the same return types. This way our "brain" can call a different script based on what is contained in the logic gate, but the brain code can evaluate any script that implements the interface. There are three interfaces, the Subject and Object both use the IObject interface.
 
@@ -61,7 +61,7 @@ public struct LogicGate
     public int objectActionOption;
 }
 ```
-Logic Gate Structure
+###### Logic Gate Structure
 
 
 ```C#
@@ -81,7 +81,7 @@ public void CheckLogicMatrix()//iterates through all logic matrices
         }
     }
 ```
-Check logic matrix method.
+###### Check logic matrix method.
 
 
 This method is called once per second per unit, staggered, so it isn't called at the exact same time for potentially hundreds of units. When adding a new object condition or action, it must implement the respective interface, added to the list of enums, and assigned the proper enumID so it can be chosen from the dropdown lists.
