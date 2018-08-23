@@ -161,7 +161,15 @@ public class PlayerLogicHandler : MonoBehaviour {
         defaultLogicMatrixEnum[2] = LogicGateEnumChange((ObjectE)objectConditionDropdown2.value, objectConditionOptionDropdown2.value, (ConditionE)conditionDropdown2.value, conditionOptionDropdown2.value, (ActionE)actionDropdown2.value, actionDropdown2.value, ObjectE.Enemy, (int)ObjectOptionE.Base);
         defaultLogicMatrixEnum[3] = LogicGateEnumChange((ObjectE)objectConditionDropdown2.value, objectConditionOptionDropdown2.value, (ConditionE)conditionDropdown2.value, conditionOptionDropdown2.value, (ActionE)actionDropdown2.value, actionDropdown2.value, ObjectE.Enemy, (int)ObjectOptionE.Base);
 
-        logicMatrixEnum = defaultLogicMatrixEnum;
+        logicMatrixEnum[0] = new LogicGateEnum();
+        logicMatrixEnum[0] = defaultLogicMatrixEnum[0];
+        logicMatrixEnum[1] = new LogicGateEnum();
+        logicMatrixEnum[1] = defaultLogicMatrixEnum[1];
+        logicMatrixEnum[2] = new LogicGateEnum();
+        logicMatrixEnum[2] = defaultLogicMatrixEnum[2];
+        logicMatrixEnum[3] = new LogicGateEnum();
+        logicMatrixEnum[3] = defaultLogicMatrixEnum[3];
+
         SetDropdowns(logicMatrixEnum);
         Apply();
     }
@@ -247,7 +255,14 @@ public class PlayerLogicHandler : MonoBehaviour {
         {
             foreach (GameObject obj in playerSelect.selected)
             {
-                obj.GetComponent<Status>().logicMatrixEnum = logicMatrixEnum;
+                obj.GetComponent<Status>().logicMatrixEnum[0] = new LogicGateEnum();
+                obj.GetComponent<Status>().logicMatrixEnum[0] = logicMatrixEnum[0];
+                obj.GetComponent<Status>().logicMatrixEnum[1] = new LogicGateEnum();
+                obj.GetComponent<Status>().logicMatrixEnum[1] = logicMatrixEnum[1];
+                obj.GetComponent<Status>().logicMatrixEnum[2] = new LogicGateEnum();
+                obj.GetComponent<Status>().logicMatrixEnum[2] = logicMatrixEnum[2];
+                obj.GetComponent<Status>().logicMatrixEnum[3] = new LogicGateEnum();
+                obj.GetComponent<Status>().logicMatrixEnum[3] = logicMatrixEnum[3];
             }
         }
         SetDropdowns(logicMatrixEnum);

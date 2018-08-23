@@ -8,11 +8,14 @@ public class HealthBarRotate : MonoBehaviour {
 
     private void Awake()
     {
-        playerCam = GameObject.Find("Player");
+        playerCam = GameObject.Find("Player(Clone)");
     }
 
     void FixedUpdate()
     {
-        transform.rotation = playerCam.transform.rotation;//rotates health bar to player rotation
+        if (playerCam != null)
+        {
+            transform.rotation = playerCam.transform.rotation;//rotates health bar to player rotation
+        }
 	}
 }

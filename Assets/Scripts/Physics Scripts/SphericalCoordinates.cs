@@ -36,19 +36,19 @@ public class SphericalCoordinates : MonoBehaviour
     void FixedUpdate()
     {
         
-        sphericalCoordinates.theta += Input.GetAxis("Horizontal") / 50f;//horizontal camera movement
+        sphericalCoordinates.theta += Input.GetAxis("Horizontal") / 75f;//horizontal camera movement
         if (Input.GetKey(KeyCode.UpArrow) == true && sphericalCoordinates.phi < Mathf.PI / 2f)//up camera movement
         {
-            if (sphericalCoordinates.phi + 1f / 100f < Mathf.PI / 2f)
+            if (sphericalCoordinates.phi + 1f / 75f < Mathf.PI / 2f)
             {
-                sphericalCoordinates.phi += 1f / 100f;
+                sphericalCoordinates.phi += 1f / 75f;
             }
         }
         if (Input.GetKey(KeyCode.DownArrow) == true && sphericalCoordinates.phi > - Mathf.PI / 2f)//down camera movement
         {
-            if (sphericalCoordinates.phi - 1f / 100f > - Mathf.PI / 2f)
+            if (sphericalCoordinates.phi - 1f / 75f > - Mathf.PI / 2f)
             {
-                sphericalCoordinates.phi -= 1f / 100f;
+                sphericalCoordinates.phi -= 1f / 75f;
             }
         }
 
