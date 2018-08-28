@@ -15,6 +15,7 @@ public class PlayerSelect : MonoBehaviour
     private int moonLayerMask = 1 << 12;
     public List<GameObject> selected = new List<GameObject>();
     private Player player;
+    private PlayerLogicHandler playerLogicHandler;
     private Camera playerCamera;
     [SerializeField]
     private Text SelectedText;
@@ -22,6 +23,7 @@ public class PlayerSelect : MonoBehaviour
     private void Start()
     {
         player = GetComponent<Player>();
+        playerLogicHandler = GetComponent<PlayerLogicHandler>();
         playerCamera = GetComponent<Camera>();
     }
     // Update is called once per frame
@@ -62,11 +64,14 @@ public class PlayerSelect : MonoBehaviour
                     if (selectRect.Contains(playerCamera.WorldToViewportPoint(obj.transform.position), true) && obj.GetComponent<Status>().unitType == UnitTypeE.Factory && Vector3.Distance(obj.transform.position, transform.position) < Vector3.Distance(Vector3.zero, transform.position))
                     {
                         selected.Add(obj);
-                        
                     }
                 }
             }
-            
+            if (selected.Count > 0)
+            {
+                playerLogicHandler.SetStored(selected[0].GetComponent<Status>().logicMatrixEnum);
+            }
+
             foreach (GameObject obj in selected)
             {
                 obj.GetComponent<Status>().selected = true;

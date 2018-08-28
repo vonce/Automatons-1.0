@@ -109,7 +109,7 @@ public class PlayerBuild : MonoBehaviour {
 
         if (Input.GetMouseButtonUp(0))
         {
-            if (buildingPreview != null && buildingPreview.GetComponent<Status>().buildable > 0 && buildingPreview.GetComponent<Status>().colliding == 0)
+            if (buildingPreview != null && buildingPreview.GetComponent<Status>().buildable > 0 && buildingPreview.GetComponent<Status>().colliding == 0 && player.metal >= buildingPreview.GetComponent<Status>().buildingCost)
             {
                 buildingPreview.GetComponentInChildren<MeshRenderer>().material.color = Color.white;
                 buildingPreview.transform.Find("Collider").GetComponent<Collider>().isTrigger = false;

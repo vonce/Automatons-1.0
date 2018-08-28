@@ -394,7 +394,7 @@ MonoBehaviour:
   target: {fileID: 0}
   enemyBase: {fileID: 0}
   allyBase: {fileID: 0}
-  buildingCost: 0
+  buildingCost: 100
   unitType: 4
   primaryType: 0
   secondaryType: 0

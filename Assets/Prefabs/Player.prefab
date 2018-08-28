@@ -497,11 +497,9 @@ GameObject:
   - component: {fileID: 4282170060268622}
   - component: {fileID: 20485943488340642}
   - component: {fileID: 81552428696269102}
-  - component: {fileID: 114018260261339566}
   - component: {fileID: 114846523293920702}
   - component: {fileID: 114390143190623748}
   - component: {fileID: 114837078914822208}
-  - component: {fileID: 114833046343728692}
   - component: {fileID: 114043966314357886}
   - component: {fileID: 114803502751988968}
   m_Layer: 0
@@ -6356,38 +6354,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114018260261339566
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1081923637573198}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 112
-    i1: 182
-    i2: 241
-    i3: 62
-    i4: 159
-    i5: 30
-    i6: 215
-    i7: 228
-    i8: 250
-    i9: 90
-    i10: 216
-    i11: 14
-    i12: 191
-    i13: 162
-    i14: 32
-    i15: 104
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1
 --- !u!114 &114018695941494938
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -16965,23 +16931,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Dropdown+DropdownEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &114833046343728692
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1081923637573198}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a37ff2918bd4fac4592dde8e3d57df01, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  componentsDisable:
-  - {fileID: 20485943488340642}
-  - {fileID: 114846523293920702}
-  - {fileID: 114390143190623748}
-  - {fileID: 114837078914822208}
-  - {fileID: 81552428696269102}
 --- !u!114 &114835193421803284
 MonoBehaviour:
   m_ObjectHideFlags: 1

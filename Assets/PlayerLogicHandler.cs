@@ -255,13 +255,9 @@ public class PlayerLogicHandler : MonoBehaviour {
         {
             foreach (GameObject obj in playerSelect.selected)
             {
-                obj.GetComponent<Status>().logicMatrixEnum[0] = new LogicGateEnum();
-                obj.GetComponent<Status>().logicMatrixEnum[0] = logicMatrixEnum[0];
-                obj.GetComponent<Status>().logicMatrixEnum[1] = new LogicGateEnum();
-                obj.GetComponent<Status>().logicMatrixEnum[1] = logicMatrixEnum[1];
-                obj.GetComponent<Status>().logicMatrixEnum[2] = new LogicGateEnum();
-                obj.GetComponent<Status>().logicMatrixEnum[2] = logicMatrixEnum[2];
-                obj.GetComponent<Status>().logicMatrixEnum[3] = new LogicGateEnum();
+                obj.GetComponent<Status>().logicMatrixEnum[0] = LogicGateEnumChange((ObjectE)objectConditionDropdown0.value, objectConditionOptionDropdown0.value, (ConditionE)conditionDropdown0.value, conditionOptionDropdown0.value, (ActionE)actionDropdown0.value, actionOptionDropdown0.value, (ObjectE)objectActionDropdown0.value, objectActionOptionDropdown0.value);
+                obj.GetComponent<Status>().logicMatrixEnum[1] = LogicGateEnumChange((ObjectE)objectConditionDropdown1.value, objectConditionOptionDropdown1.value, (ConditionE)conditionDropdown1.value, conditionOptionDropdown1.value, (ActionE)actionDropdown1.value, actionOptionDropdown1.value, (ObjectE)objectActionDropdown1.value, objectActionOptionDropdown1.value);
+                obj.GetComponent<Status>().logicMatrixEnum[2] = LogicGateEnumChange((ObjectE)objectConditionDropdown2.value, objectConditionOptionDropdown2.value, (ConditionE)conditionDropdown2.value, conditionOptionDropdown2.value, (ActionE)actionDropdown2.value, actionOptionDropdown2.value, (ObjectE)objectActionDropdown2.value, objectActionOptionDropdown2.value);
                 obj.GetComponent<Status>().logicMatrixEnum[3] = logicMatrixEnum[3];
             }
         }
@@ -270,7 +266,6 @@ public class PlayerLogicHandler : MonoBehaviour {
 
     public void SetStored(LogicGateEnum[] matrix)
     {
-        logicMatrixEnum = new LogicGateEnum[4];
         logicMatrixEnum = matrix;
     }
 

@@ -24,20 +24,20 @@ public enum PercentE { ZeroPct = 0, TenPct = 1, TwentyPct = 2, ThirtyPct = 3, Fo
 public interface IObject
 {
     ObjectE enumID();
-    GameObject Object(HashSet<GameObject> set, int option);
+    GameObject Object(HashSet<GameObject> set, int option);//takes a hashset of game objects, returns game object
 }
 
 public interface ICondition
 {
     ConditionE enumID();
-    bool Condition(GameObject target, int option);
+    bool Condition(GameObject target, int option);//takes game object and returns bool
 }
 
 public interface IAction
 {
     ActionE enumID();
-    bool ActionCheck(GameObject target, int option);
-    void Action(GameObject target, int option);
+    bool ActionCheck(GameObject target, int option);//takes game object returns bool
+    void Action(GameObject target, int option);//action to be performed
 }
 
 // logic gate and matrix format
